@@ -71,7 +71,8 @@ export function signup(firstName,lastName,email,password,navigate){
 			
 		}
 		catch(error){
-			toast.error('Something went wrong, please try again')
+			toast.error(error.response.data.message);
+			//toast.error('Something went wrong, please try again')
 			console.log(error);
 		}
 		//loading off

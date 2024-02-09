@@ -1,26 +1,35 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './Component/Auth/PrivateRoute';
 import OpenRoute from './Component/Auth/OpenRoute';
 import ResetPassword from './pages/ResetPassword';
-
+import GetStarted from './pages/GetStarted';
+import Navbar from './pages/common/Navbar';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 function App() {
+  const {user} = useSelector((state) => state.profile);
+  const isLoggedIn = user==null? true: false;
 
   return (
     <div className='w-screen min-h-screen bg-richblack-900 flex flex-col text-white'>
 
+      <div className='pb-[70px]'>
+        
+        <Navbar getstarted={isLoggedIn}></Navbar>
+      </div>
 
       <Routes>
-        <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/' element={<div>home</div>}></Route>
+        <Route path='/user-auth' element={<GetStarted ></GetStarted>}></Route>
 
-        <Route path='/login' element={<OpenRoute><Login /></OpenRoute>}></Route>
-        <Route path='/signup' element={<OpenRoute><Signup /></OpenRoute>}></Route>
-        <Route path='/resetPassword' element={<OpenRoute><ResetPassword/></OpenRoute>} />
+
+        <Route path='/home' element={<Home></Home>}></Route>
+
+        <Route path='/resetPassword' element={<OpenRoute><ResetPassword /></OpenRoute>} />
 
 
         <Route path='/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>}>

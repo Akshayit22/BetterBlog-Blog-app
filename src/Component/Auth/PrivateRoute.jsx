@@ -12,7 +12,7 @@ const PrivateRoute = ({children}) => {
 	}
 	else{
 		toast.error('You need to Login First to access the private routes.')
-		return <Navigate to='/login'/>
+		return <Navigate to='/user-auth'/>
 	}
 
 }
