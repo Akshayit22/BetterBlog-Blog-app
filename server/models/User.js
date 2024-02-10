@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema(
 		},
 		token: {
 			type: String,
+			required: true,
 		},
 		image:{
 			type:String,
@@ -30,7 +31,11 @@ const userSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			required: true,
 			ref: "Profile",
-		}
+		},
+		savedBlogs:[{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Blog",
+		}],
 	},
 	{ timestamps: true }
 );

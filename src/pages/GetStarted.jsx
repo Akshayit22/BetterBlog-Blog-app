@@ -3,11 +3,11 @@ import Navbar from './common/Navbar';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { login,signup } from '../Services/operations/apiAuth';
+import { signup } from '../Services/operations/apiAuth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import login from '../Services/operations/apiAuth';
 const GetStarted = () => {
 
 	const [mode, setMode] = useState('login');
@@ -51,11 +51,7 @@ const GetStarted = () => {
 	return (
 
 		<div className='w-full'>
-			{/* <div className='pb-[70px]'>
-				<Navbar></Navbar>
-			</div> */}
-
-
+			
 			<div className='items-center justify-center mx-auto mt-10 lg:w-[40%] md:w-[60%]'>
 				<div className='flex flex-row bg-richblack-700 justify-around py-3 text-lg'>
 					<button className={`${mode === 'login' ? 'border-b-2 text-richblack-300' : ''}`} onClick={() => setMode('login')}>Login</button>
@@ -103,7 +99,8 @@ const GetStarted = () => {
 
 								</div>
 							)
-							: (  //signUp
+							: 
+							(  //signUp
 								<div className='items-center justify-start mx-auto w-[60%]'>
 
 

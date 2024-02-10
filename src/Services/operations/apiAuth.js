@@ -5,7 +5,7 @@ const { LOGIN_API, SIGNUP_API,RESETPASSWORD_API,OTPGENRATE_API } = AuthEndpoints
 import {setToken} from '../../redux/slices/authSlice.js';
 import {setUser} from '../../redux/slices/profileSlice.js';
 
-export function login(email, password, navigate) {
+function login(email, password, navigate) {
 	return async (dispatch) => {
 		// loading toast : On
 		const toastId = toast.loading("Loading...")
@@ -48,6 +48,7 @@ export function login(email, password, navigate) {
 		
 	}
 }
+export default login;
 
 export function signup(firstName,lastName,email,password,navigate){
 	return async(dispatch)=>{
@@ -64,9 +65,11 @@ export function signup(firstName,lastName,email,password,navigate){
 			  throw new Error(response.data.message)
 			}
 			//navigate
-			toast.success('Sign Up Success, Now to your account');
+			toast.success('Sign Up Success, Now login into your account');
 			setTimeout(()=>{
-				navigate("/login")
+				//navigate("/login");
+				console.log('herer')
+				dispatch(login(email, password, navigate));
 			},1000);
 			
 		}
@@ -152,7 +155,7 @@ export function resetPassword(email,otp,password,confirmPassword, navigate) {
 				
 			toast.success('Password changed Successfully, Now you can Login.');
 			setTimeout(()=>{
-				navigate("/login");
+				navigate("/user-auth");
 			},1000);
 			
 		}

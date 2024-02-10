@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const database = require("./config/database");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("./config/cloudinary");
-
+const header_middleware = require("./middlewares/header");
 
 const app = express();
 dotenv.config();
@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 4000;
 database.connect();
 
 app.use(express.json());
+app.use(header_middleware);
 app.use(cookieParser());
 app.use(cors());
 
