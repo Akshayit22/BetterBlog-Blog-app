@@ -11,9 +11,9 @@ const Navbar = ({getstarted=true}) => {
 
 	let Links =[
 		{name:"home",link:"/"},
-		{name:"profile",link:"#"},
-		{name:"about",link:"#"},
-		{name:"contact us",link:"#"},
+		{name:"profile",link:"/dashboard"},
+		{name:"about",link:"/"},
+		{name:"contact us",link:"/"},
 	      ];
 	
 
@@ -37,7 +37,7 @@ const Navbar = ({getstarted=true}) => {
 					{
 						Links.map((link,index) => (
 							<li key={index} className='md:ml-8 md:my-0 my-7 font-semibold'>
-								<a href={link.link} className='text-gray-800 hover:text-blue-400 duration-500'>{link.name.toUpperCase()}</a>
+								<a onClick={()=>Navigate(link.link)} className='text-gray-800 hover:text-blue-400 duration-500 cursor-pointer'>{link.name.toUpperCase()}</a>
 							</li>))
 					}
 					{

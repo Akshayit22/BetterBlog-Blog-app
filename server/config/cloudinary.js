@@ -18,3 +18,8 @@ exports.cloudinaryConnect = () =>{
 	}
 
 }
+
+exports.RandomBlogImage = ["https://res.cloudinary.com/dwvnhmzvu/image/upload/v1707656858/setup/oocdzr99jzqem0gj1s1q.jpg",
+"https://res.cloudinary.com/dwvnhmzvu/image/upload/v1707656948/setup/zisqss984okudza6nxtt.jpg",
+"https://res.cloudinary.com/dwvnhmzvu/image/upload/v1707656972/setup/n8d7m7e4flqmsyheskm9.jpg",
+"https://res.cloudinary.com/dwvnhmzvu/image/upload/v1707656996/setup/tin5mgrstuom5lqogne6.jpg"];

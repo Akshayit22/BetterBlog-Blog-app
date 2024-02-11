@@ -16,6 +16,7 @@ exports.AuthMid = async(req,res,next) =>{
 		try{
 			const decode =  jwt.verify(token, process.env.JWT_SECRET);
 			console.log("decode ",decode);
+			// decode = { email: user.email, id: user._id }
 			req.user = decode; // IMP
 		}
 		catch(error) {

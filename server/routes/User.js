@@ -8,6 +8,8 @@ const {login,signup,resetPassword,otpGenerator} = require('../controllers/Auth')
 const {dashboard} = require('../controllers/Dashboard');
 
 const {CloudMail} = require('../controllers/Auth');
+
+
 router.post("/uploader",demo,CloudMail);
 
 router.post("/login",demo,login);

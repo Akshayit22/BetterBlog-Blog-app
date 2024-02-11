@@ -30,14 +30,20 @@ app.use(
 cloudinary.cloudinaryConnect();
 
 
+/* Routes defining */
 
 const userRoutes = require("./routes/User");
 app.use("/api/v1/auth", userRoutes);
 
+const blogRoutes = require("./routes/Blog");
+app.use("/api/v1/blog",blogRoutes);
+
+const commentRoutes = require('./routes/Comment');
+app.use("/api/v1/comment",commentRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
-    message: "Welcome to the Connection API",
+    message: "Welcome to the Blog App API",
   });
   res.end();
 });
@@ -51,32 +57,3 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-output.json');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-// const corsOptions = {
-//   origin:process.env.CORS_ORIGIN,
-//   Credential:true,
-//   "allowHeaders":['sessionId','Content-Type'],
-//   "exploseHeaders":['sessionId'],
-//   "methods":"GET,POST,HEAD,PUT,PATCH,DELETE",
-//   "preflightContinue":false
-// }
-// app.use(cors(corsOptions));
-
-// app.use(
-//   cors({
-//     origin:process.env.CORS_ORIGIN,
-//      credentials: false,
-//      maxAge: 14400,
-//   })
-// );
-
-
-// app.use((req,res,next)=>{
-//   res.setHeader("Access-Control-Allow-Origin","*");
-//   res.setHeader("Access-Control-Allow-Methods","POST, GET, PUT");
-//   res.setHeader("Access-Control-Allow-Headers","Content-Type");
-//   next();
-// })
-
-// app.options("*",(req,res)=>{
-// })
