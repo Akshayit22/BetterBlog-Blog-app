@@ -35,13 +35,14 @@ exports.signup = async (req, res) => {
 		const profileDetails = await Profile.create({
 			gender: null,
 			about: null,
-			contactNumber: null,
+			contact: null,
 		});
 
 		const user = await User.create({
 			firstName, lastName, email, password: HashedPassword,
+			image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
 			additionalDetails: profileDetails,
-		})
+		});
 
 
 		return res.status(200).json({
@@ -292,3 +293,4 @@ exports.CloudMail = async (req, res) => {
 		});
 	}
 }
+

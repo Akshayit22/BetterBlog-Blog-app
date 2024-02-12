@@ -41,6 +41,9 @@ app.use("/api/v1/blog",blogRoutes);
 const commentRoutes = require('./routes/Comment');
 app.use("/api/v1/comment",commentRoutes);
 
+const profileRoutes = require("./routes/Profile");
+app.use("/api/v1/profile",profileRoutes);
+
 app.get("/", (req, res) => {
   res.status(200).json({
     message: "Welcome to the Blog App API",

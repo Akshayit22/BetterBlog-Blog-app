@@ -19,7 +19,11 @@ exports.createComment = async(req,res) =>{
 			body:body
 		})
 
-		const blogUpdate = await Blog.findByIdAndUpdate({_id:commentResp.Blog},{$push:{comments:commentResp._id}},{new:true});
+		const blogUpdate = await Blog.findByIdAndUpdate(
+				{_id:commentResp.Blog},
+				{$push:{comments:commentResp._id}},
+				{new:true}
+		);
 
 		return res.status(200).json({
 			success: true,
