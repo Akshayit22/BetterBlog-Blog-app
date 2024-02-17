@@ -6,6 +6,7 @@ require("dotenv").config();
 const User = require('../models/User');
 const Profile = require('../models/Profile');
 const OTP = require('../models/OTP');
+const ContactUs = require('../models/ContactUs');
 
 const { uploadImageToCloudinary } = require('../config/imageUploader');
 const mailSender = require("../config/mailSender");
@@ -258,6 +259,10 @@ exports.CloudMail = async (req, res) => {
 		}
 		else {
 			console.log('image not found');
+			return res.status(301).json({
+				success:false,
+				message:"Image Not Found",
+			});
 		}
 
 		// Mail Sender
@@ -294,3 +299,67 @@ exports.CloudMail = async (req, res) => {
 	}
 }
 
+exports.uploadImage = async(req,res) =>{
+	try{
+		if (req.files) {
+			var url = '';
+			//Image Uploader
+			const Image = req.files.Image;
+			const ImageUpload = await uploadImageToCloudinary(
+				Image,
+				process.env.FOLDER_NAME,
+			)
+			url = ImageUpload.secure_url;
+		}
+		else {
+			console.log('image not found');
+			return res.status(301).json({
+				success:false,
+				message:"Image Not Found",
+			});
+		}
+
+		res.status(200).json({
+			success: true,
+			url: url,
+			message: "image uploaded Successfully."
+		})
+
+
+	}
+	catch(error){
+		console.error(error);
+		return res.status(500).json({
+			success: false,
+			url:url,
+			message: "Error in uploading. Please try again.",
+		});
+	}
+}
+
+exports.contactUs = async(req,res) =>{
+	try{
+		const {email,message,name} = req.body;
+
+		const resp = await ContactUs.create({
+			email,message,name
+		});
+
+		console.log("contact us form sumbitted successfully.");
+
+		return res.status(200).json({
+			success: false,
+			response : resp,
+			message: "contact us form sumbitted successfully.",
+		});		
+
+	}
+	catch(error){
+		console.error(error);
+		return res.status(500).json({
+			success: false,
+			url:url,
+			message: "Error submitting contact us form. Please try again.",
+		});
+	}
+}

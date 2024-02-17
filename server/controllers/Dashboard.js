@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Blog = require('../models/Blog');
 const jwt = require("jsonwebtoken");
 
 exports.dashboard = async(req,res) =>{
@@ -8,10 +9,21 @@ exports.dashboard = async(req,res) =>{
 
 		const user = await User.findOne({email}).populate('additionalDetails').exec();
 
+		const AllBlogsOfUser = await Blog.find({user:user})
+			.populate("user")
+			.populate({
+				path:'comments',
+				populate:{
+					path:'user',
+				}
+			})
+			.exec();
+
 		return res.status(200).json({
 			success: true,
-			data:user,
-			message: "User registered successfully",
+			user:user,
+			data:AllBlogsOfUser,
+			message: "User details fetched successfully",
 		});
 
 

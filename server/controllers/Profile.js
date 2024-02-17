@@ -95,7 +95,7 @@ exports.saveBlog = async(req,res) =>{
 		else{
 			return res.status(403).send({
 				success: false,
-				message: "Mode field is not defined correctly options : Save / Unsave.  ",
+				message: "Mode field is not defined correctly, options : Save / Unsave.  ",
 			});
 		}		
 

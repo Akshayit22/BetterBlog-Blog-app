@@ -28,7 +28,7 @@ exports.AuthMid = async(req,res,next) =>{
 			});
 		}
 
-		console.log("This is Auth middleWare to testing",token);
+		console.log("Token is authenticated in Auth Middeleware");
 		next();
 	}
 	catch(error){

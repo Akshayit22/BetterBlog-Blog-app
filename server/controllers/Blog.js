@@ -12,10 +12,9 @@ const User = require('../models/User')
     "category":["one"]
 }
 */
-
 exports.createBlog = async (req, res) => {
 	try {
-		const { title, content, referenceLinks, category } = req.body;
+		const { title, content, referenceLinks, category} = req.body;
 
 		const { email, id } = req.user;
 		const userDetails = await User.findOne({ email });
@@ -67,7 +66,6 @@ exports.createBlog = async (req, res) => {
 	}
 }
 
-
 exports.getAllBlogs = async (req, res) => {
 	try {
 		const AllBlogs = await Blog.find({})
@@ -95,7 +93,6 @@ exports.getAllBlogs = async (req, res) => {
 		});
 	}
 }
-
 
 /*
 {
@@ -161,7 +158,6 @@ exports.updateBlog = async (req, res) => {
 	}
 }
 
-
 exports.getBlog = async(req,res) =>{
 	try{
 		const id = req.params.id;
@@ -194,6 +190,29 @@ exports.getBlog = async(req,res) =>{
 		return res.status(500).json({
 			success: false,
 			message: "Internal server error, while fetching a blog",
+		});
+	}
+}
+
+exports.deleteBlog = async (req,res) =>{
+	try{
+		const {blogId} = req.body;
+
+		const resp = await Blog.findByIdAndDelete(
+			{_id:blogId}
+		);
+
+
+		return res.status(200).json({
+			success: true,
+			message: "Blog deleted successfully",
+		});
+	}
+	catch(error){
+		console.error(error);
+		return res.status(500).json({
+			success: false,
+			message: "Internal server error, while deleting blog.",
 		});
 	}
 }

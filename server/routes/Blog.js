@@ -10,8 +10,9 @@ const {updateBlog,getBlog} = require("../controllers/Blog");
 
 
 router.post('/createBlog',AuthMid,createBlog);
-router.get('/getAllBlogs',getAllBlogs);
 router.put('/updateBlog',AuthMid,updateBlog);
+
+router.get('/getAllBlogs',getAllBlogs);
 router.get('/getBlog/:id',getBlog);
 
 
