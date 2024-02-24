@@ -1,7 +1,7 @@
 import apiConnector  from '../apiConnector';
-import { AuthEndpoints, contactusEndpoint } from '../api';
+import { AuthEndpoints, contactusEndpoint} from '../api';
 import { toast } from "react-hot-toast";
-const { LOGIN_API, SIGNUP_API,RESETPASSWORD_API,OTPGENRATE_API } = AuthEndpoints;
+const { LOGIN_API, SIGNUP_API,RESETPASSWORD_API,OTPGENRATE_API,UPLOAD_IMAGE_API} = AuthEndpoints;
 import {setToken} from '../../redux/slices/authSlice.js';
 import {setUser} from '../../redux/slices/profileSlice.js';
 
@@ -218,4 +218,31 @@ export function signUp(
 
 
 */
+
+//UPLOAD_IMAGE_API : contains image in req.files and return the url in response
+export function uploadImage(){
+	return async(dispatch)=>{
+
+		const toastId = toast.loading("Image Uploading...")
+		try{
+			console.log("UPLOAD IMAGE RESPONSE",UPLOAD_IMAGE_API);
+			// const response = await apiConnector("POST", UPLOAD_IMAGE_API);
+			// //const response = {data:{success:true}};
+			// console.log("UPLOAD IMAGE RESPONSE............", response);
+	
+			if (!response.data.success) {
+			  throw new Error(response.data.message)
+			}
+			
+			
+		}
+		catch(error){
+			toast.error(error.response.data.message);
+			//toast.error('Something went wrong, please try again')
+			console.log(error);
+		}
+
+		toast.dismiss(toastId);
+	}
+}
 
