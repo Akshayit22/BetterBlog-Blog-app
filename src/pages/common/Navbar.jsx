@@ -10,7 +10,7 @@ const Navbar = ({getstarted=true}) => {
 	getstarted = getstarted?true:false;
 
 	let Links =[
-		{name:"home",link:"/"},
+		{name:"home",link:"/home"},
 		{name:"profile",link:"/dashboard"},
 		{name:"about",link:"/"},
 		{name:"contact us",link:"/"},
@@ -22,7 +22,7 @@ const Navbar = ({getstarted=true}) => {
 		<div className='shadow-md w-full fixed top-0 left-0 '>
 			<div className='md:flex items-center justify-between bg-richblack-700 py-4 md:px-10 px-7'>
 				{/* logo  */}
-				<div className='font-bold text-2xl cursor-pointer flex items-center gap-1' onClick={()=>Navigate('/')}>
+				<div className='font-bold text-2xl cursor-pointer flex items-center gap-1' onClick={()=>Navigate('/home')}>
 					
 					<span>Better Blog{":)"}</span>
 				</div>

@@ -9,21 +9,22 @@ import GetStarted from './pages/GetStarted';
 import Navbar from './pages/common/Navbar';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import Blog from './pages/blog/blog';
 
 function App() {
-  const {user} = useSelector((state) => state.profile);
-  const isLoggedIn = user==null? true: false;
+  const { user } = useSelector((state) => state.profile);
+  const isLoggedIn = user == null ? true : false;
 
   return (
     <div className='w-screen min-h-screen bg-richblack-900 flex flex-col text-white'>
 
       <div className='pb-[70px]'>
-        
+
         <Navbar getstarted={isLoggedIn}></Navbar>
       </div>
 
       <Routes>
-        <Route path='/' element={<div>home</div>}></Route>
+        <Route path='/' element={<Home></Home>}></Route>
         <Route path='/user-auth' element={<GetStarted ></GetStarted>}></Route>
 
 
@@ -31,8 +32,10 @@ function App() {
 
         <Route path='/resetPassword' element={<OpenRoute><ResetPassword /></OpenRoute>} />
 
+        <Route path='/blog/:id' element={<OpenRoute><Blog></Blog></OpenRoute>} />
 
         <Route path='/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>}>
+
           {/* // all child routers under dashboard
 
               <Route path="dashboard/my-profile" element={<MyProfile />} />

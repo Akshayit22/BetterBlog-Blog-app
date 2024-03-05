@@ -20,7 +20,7 @@ export const BlogEndpoints = {
 	UPDATE_BLOG_API:BASE_API+'blog/updateBlog',
 
 	GET_ALL_BLOG_API:BASE_API+'blog/getAllBlogs',
-	GET_BLOG_API:BASE_API+'blog/getBlog/:id',
+	GET_BLOG_API:BASE_API+'blog/getBlog/',
 };
 
 // Comment endpint : /comment

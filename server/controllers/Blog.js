@@ -160,7 +160,7 @@ exports.updateBlog = async (req, res) => {
 
 exports.getBlog = async(req,res) =>{
 	try{
-		const id = req.params.id;
+		const id = req.params.id || req.body.id;
 
 		if(!id || id  === undefined || id === null){
 			return res.status(403).send({

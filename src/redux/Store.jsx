@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import authReducer from './slices/authSlice';
-import cartReducer from './slices/CartSlice';
+import blogsSlice from "./slices/blogsSlice";
 import proflieReducer from './slices/profileSlice';
 
 
@@ -15,9 +15,9 @@ import proflieReducer from './slices/profileSlice';
 
 const rootReducer = combineReducers({
 	auth:authReducer,
-	cart:cartReducer,
+	blog:blogsSlice,
 	profile:proflieReducer,
 	
-})
+});
     
 export default rootReducer;

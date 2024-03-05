@@ -71,7 +71,7 @@ const GetStarted = () => {
 										<div className='mt-10 flex flex-col  justify-around'>
 											<label htmlFor='email'>Email : </label>
 											<input type='email' id='email' name='email'
-												className='bg-white text-black p-1 rounded-md text-lg'
+												className='bg-richblack-50 text-black p-1 rounded-md text-lg'
 												{...register('email',)}>
 
 												{
@@ -83,7 +83,7 @@ const GetStarted = () => {
 										<div className='mt-10 flex mb-10 flex-col  justify-around'>
 											<label htmlFor='password'>password : </label>
 											<input type='password' id='password' name='password'
-												className='bg-white text-black p-1 rounded-md'
+												className='bg-richblack-50 text-black p-1 rounded-md'
 												{...register('password',)}>
 												{
 													errors.password && <p>Password is required</p>
@@ -110,7 +110,7 @@ const GetStarted = () => {
 											<div className='flex flex-col '>
 												<label htmlFor='firstName'>First Name :</label>
 												<input type='firstName' id='firstName' name='firstName'
-													className='bg-white text-black p-1 rounded-md text-lg'
+													className='bg-richblack-50 text-black p-1 rounded-md text-lg'
 													{...register('firstName')}>
 
 													{
@@ -121,7 +121,7 @@ const GetStarted = () => {
 											<div className=' flex flex-col '>
 												<label htmlFor='lastName'>Last Name :</label>
 												<input type='lastName' id='lastName' name='lastName'
-													className='bg-white text-black p-1 rounded-md text-lg'
+													className='bg-richblack-50 text-black p-1 rounded-md text-lg'
 													{...register('lastName', )}>
 
 													{
@@ -134,7 +134,7 @@ const GetStarted = () => {
 										<div className='mt-5 flex flex-col'>
 											<label htmlFor='email'>Email :</label>
 											<input type='email' id='email' name='email'
-												className='bg-white text-black p-1 rounded-md text-lg'
+												className='bg-richblack-50 text-black p-1 rounded-md text-lg'
 												{...register('email',)}>
 
 												{
@@ -146,7 +146,7 @@ const GetStarted = () => {
 										<div className='mt-5 flex flex-col mb-10'>
 											<label htmlFor='password'>password :</label>
 											<input type='password' id='password' name='password'
-												className='bg-white text-black p-1 rounded-md '
+												className='bg-richblack-50 text-black p-1 rounded-md '
 												{...register('password')}>
 												{
 													errors.password && <p>Password is required</p>

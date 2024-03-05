@@ -68,7 +68,6 @@ export function signup(firstName,lastName,email,password,navigate){
 			toast.success('Sign Up Success, Now login into your account');
 			setTimeout(()=>{
 				//navigate("/login");
-				console.log('herer')
 				dispatch(login(email, password, navigate));
 			},1000);
 			

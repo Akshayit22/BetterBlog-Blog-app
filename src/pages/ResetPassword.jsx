@@ -68,7 +68,7 @@ const ResetPassword = () => {
 				<div className=' flex flex-col'>
 					<label htmlFor='email'>Email :</label>
 					<input type='email' id='email' name='email'
-						className='bg-white text-black p-1 rounded-md text-lg'
+						className='bg-richblack-50 text-black p-1 rounded-md text-lg'
 						{...register('email')}>
 
 						{
@@ -88,7 +88,7 @@ const ResetPassword = () => {
 				<div className='mt-5 flex flex-col mb-2'>
 					<label>Enter OTP :</label>
 					<input type='text' id='otp' name='otp' 
-						className='bg-white text-black p-1 rounded-md text-lg'
+						className='bg-richblack-50 text-black p-1 rounded-md text-lg'
 						{...register('otp')}>
 						{
 							errors.password && <p>OTP is required</p>
@@ -100,7 +100,7 @@ const ResetPassword = () => {
 				<div className='flex flex-col mb-3'>
 					<label>Password :</label>
 					<input type='password' id='password' name='password' 
-						className='bg-white text-black p-1 rounded-md text-lg'
+						className='bg-richblack-50 text-black p-1 rounded-md text-lg'
 						{...register('password')}>
 						{
 							errors.password && <p>Password is required</p>
@@ -111,7 +111,7 @@ const ResetPassword = () => {
 				<div className=' flex flex-col mb-10'>
 					<label>Confirm password :</label>
 					<input type='password' id='confirmPassword' name='confirmPassword' 
-						className='bg-white text-black p-1 rounded-md text-lg'
+						className='bg-richblack-50 text-black p-1 rounded-md text-lg'
 						{...register('confirmPassword')}>
 						{
 							errors.confirmPassword && <p>Confirm Password is required</p>
