@@ -1,11 +1,14 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
-function AllBlogs({ data }) {
+function AllBlogs() {
 
+	const {AllBlogs} = useSelector((state)=> state.blog);
 	const navigate = useNavigate();
-
+	const data = AllBlogs;
+	
 	return (
 		<div>
 			{

@@ -1,23 +1,24 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-// const initialState = {
-//     data : []
-// }
+const initialState = {
+    AllBlogs : [],
+    OneBlog : [],
+}
 
 const blogsSlice= createSlice({
     name:"blog",
-    initialState:[],
+    initialState:initialState,
     reducers:{
-        addBlogs:(state,action)=>{
-            state.push(action.payload);
+        addBlogs : (state, action) =>{
+            state.AllBlogs = action.payload;
         },
-        removeBlogs:(state,action)=>{
-            return state.filter((item) => item.id !== action.payload);
-        },
+        addBlog : (state, action) =>{
+            state.OneBlog = action.payload;
+        }
     }
 });
 
-export const {addBlogs, removeBlogs} = blogsSlice.actions;
+export const {addBlogs, addBlog} = blogsSlice.actions;
 
 export default blogsSlice.reducer;
 
