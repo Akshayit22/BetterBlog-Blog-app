@@ -3,14 +3,13 @@ const jwt = require("jsonwebtoken");
 
 exports.AuthMid = async(req,res,next) =>{
 	try{
-		const token = req.cookies.token || req.body.token 
-				|| req.header('Authorization').replace('Bearer ','');
+		const token = req.body.token || req.header('Authorization').replace('Bearer ','') || req.cookies.token;
 
 		if(!token){
 			return res.status(401).json({
 				success:false,
 				message:'Token is missing',
-			})
+			});
 		}
 
 		try{
@@ -32,6 +31,7 @@ exports.AuthMid = async(req,res,next) =>{
 		next();
 	}
 	catch(error){
+		console.log(error);
 		return res.status(401).json({
 			success: false,
 			message: "Token is missing, you need to login first,",

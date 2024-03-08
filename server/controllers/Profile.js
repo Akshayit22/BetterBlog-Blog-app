@@ -47,13 +47,21 @@ exports.getUserDetails = async(req,res) =>{
 					.populate('additionalDetails').populate('savedBlogs').exec();
 
 		UserDetails.password = undefined;
-		const UserBlogs = await Blog.find({user:UserDetails._id}).populate('comments').exec();
+		const UserBlogs = await Blog.find({user:UserDetails._id})
+				.populate("user")
+				.populate({
+					path:'comments',
+					populate:{
+						path:'user',
+					}
+				})
+				.exec();
 
 		return res.status(200).json({
 			success:true,
 			UserDetails:UserDetails,
 			UserBlogs:UserBlogs,
-			message:"User details and user blogs fetched successfully."
+			message:"User details and user blogs fetched successfully.",
 		});
 
 	}

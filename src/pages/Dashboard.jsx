@@ -1,47 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {logout} from '../Services/operations/apiAuth';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-
+import {getProfile} from '../Services/operations/apiProfile';
 
 const Dashboard = () => {
-	const {user} = useSelector((state) => state.profile);
-	const [showDetails,setShowDetails] = useState(false);
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const {token} =useSelector((s)=>s.auth);
+	const {profileDetails} = useSelector((state)=>state.profile);
+	const {UserBlogs} = useSelector((state)=> state.profile);
 
-	const logoutFunc = () =>{
-		setShowDetails(false);
-		dispatch(logout());
-		navigate('/');
-	}
-	const showInfo = () =>{
-		if(user === null){
-			toast.error('something went wrong, you need to login again.');
-			logoutFunc();
-		}
-		setShowDetails(true);
-		console.log(user);
-	}
+	useEffect(()=>{
+		dispatch(getProfile(token));
+		console.log("profileDetails" , profileDetails);
+		console.log("UserBlogs" , UserBlogs);
+
+	},[]);
+	
 
 	return (
 		<div>
 			
-			<h1>Welcome to Dashboard</h1> 
-			<button onClick={()=>showInfo()}> Show my Details</button>
+			<h1>Welcome to Your Profile, </h1> 
+			{/* <button onClick={()=>showInfo()}> Show my Details</button> */}
 			{
-				showDetails==true? (
+				profileDetails!==null? (
 					<div>
-						<h1>{user.firstName + " " + user.lastName}</h1>
-						<h2>{user.email}</h2>
-						<p>{user.additionalDetails.dateOfBirth}</p>
+						<h1>{profileDetails.firstName + " " + profileDetails.lastName}</h1>
+						<h2>{profileDetails.email}</h2>
+						<p>{profileDetails.additionalDetails.gender}</p>
+						
 					</div>
 				):
 				(<div></div>)
 			}
 
-			<button onClick={()=>logoutFunc()}> LogOut</button>
+			{
+				UserBlogs!==null?
+				(
+					<div>
+						<h1>User Blogs</h1>
+						<p>{UserBlogs[0].title}</p>
+					</div>
+				):
+				(<div></div>)
+			}
+
 		</div>
 	)
 }

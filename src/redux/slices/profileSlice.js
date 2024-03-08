@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState ={
     user:localStorage.getItem("user")?JSON.parse(localStorage.getItem("user")):null,
     loading:false,
+    profileDetails:null,
+    UserBlogs:null,
 }
 
 const profileSlice =createSlice({
@@ -13,11 +15,14 @@ const profileSlice =createSlice({
             state.user=value.payload
             localStorage.setItem("user",JSON.stringify(value.payload));
         },
-        setLoading(state,value){
-            state.loading=value.payload
+        setProfileDetails:(state,action)=> {
+            state.profileDetails = action.payload;
         },
+        setUserBlogs:(state,action) =>{
+            state.UserBlogs = action.payload;
+        }
     }
 });
 
-export const {setUser,setLoading}=profileSlice.actions;
+export const {setUser,setProfileDetails,setUserBlogs}=profileSlice.actions;
 export default profileSlice.reducer;

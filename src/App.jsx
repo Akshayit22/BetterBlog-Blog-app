@@ -8,8 +8,9 @@ import ResetPassword from './pages/ResetPassword';
 import GetStarted from './pages/GetStarted';
 import Navbar from './pages/common/Navbar';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
 import Blog from './pages/blog/blog';
+import Footer from './pages/common/Footer';
+import ContactUs from './pages/common/ContactUs';
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -29,6 +30,8 @@ function App() {
 
 
         <Route path='/home' element={<Home></Home>}></Route>
+
+        <Route path='/contactUs' element={<ContactUs></ContactUs>} ></Route>
 
         <Route path='/resetPassword' element={<OpenRoute><ResetPassword /></OpenRoute>} />
 
@@ -80,7 +83,8 @@ function App() {
         <Route path='*' element={<h1>Page Not Found 404</h1>}></Route>
       </Routes>
 
-
+         
+      <Footer></Footer>
     </div>
   )
 }

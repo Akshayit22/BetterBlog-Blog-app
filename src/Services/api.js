@@ -21,6 +21,7 @@ export const BlogEndpoints = {
 
 	GET_ALL_BLOG_API:BASE_API+'blog/getAllBlogs',
 	GET_BLOG_API:BASE_API+'blog/getBlog/',
+	DELETE_BLOG_API:BASE_API+'blog/deleteBlog',
 };
 
 // Comment endpint : /comment

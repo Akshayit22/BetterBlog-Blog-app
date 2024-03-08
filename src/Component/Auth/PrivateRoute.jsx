@@ -15,13 +15,14 @@ const PrivateRoute = ({children}) => {
 	// 	toast.error('You need to Login First to access the private routes.')
 		
 	// }
+	//console.log("open",token);
 	return(
 		token !== null ? (children) : (
 			// (toast.error('You need to Login First to access the private routes.'))
-			<div className='flex flex-col justify-center mx-auto items-center gap-5 my-[15%]'>
-				<h1 className='center '>You are Not Logged In</h1>
-				<h2 className='center'>Please Login or SignUp</h2>
-				<button onClick={()=>{navigator('/user-auth')}} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static w-fit justify-center' >Get Started</button>
+			<div className='flex flex-col h-[60%] items-center gap-5 align-center mt-[20vh]'>
+				<h1 className='text-[3vh] md:text-[4vh] text-red'>You are Not Logged In</h1>
+				<h2 className='text-[2vh] md:text-[3vh]'>Please Login or SignUp</h2>
+				<button onClick={()=>{navigator('/user-auth')}} className='btn bg-blue-600 text-white  font-semibold px-3 py-1 rounded duration-500 md:static w-fit justify-center' >Get Started</button>
 			</div>
 		)
 	)

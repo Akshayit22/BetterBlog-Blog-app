@@ -1,9 +1,10 @@
 import apiConnector  from '../apiConnector';
 import { AuthEndpoints, contactusEndpoint} from '../api';
 import { toast } from "react-hot-toast";
-const { LOGIN_API, SIGNUP_API,RESETPASSWORD_API,OTPGENRATE_API,UPLOAD_IMAGE_API} = AuthEndpoints;
+const { LOGIN_API, SIGNUP_API,RESETPASSWORD_API,OTPGENRATE_API,UPLOAD_IMAGE_API,DASHBOARD} = AuthEndpoints;
 import {setToken} from '../../redux/slices/authSlice.js';
 import {setUser} from '../../redux/slices/profileSlice.js';
+
 
 function login(email, password, navigate) {
 	return async (dispatch) => {
@@ -23,8 +24,7 @@ function login(email, password, navigate) {
 			
 			// login success toast
 			// get User data in response.data.user
-		
-			dispatch(setToken(response.data.token))
+			dispatch(setToken(JSON.stringify(response.data.token)))
 			dispatch(setUser({ ...response.data.user,}))
 
 			localStorage.setItem("user", JSON.stringify(response.data.user))
@@ -39,7 +39,7 @@ function login(email, password, navigate) {
 			
 		}
 		catch (error) {
-			console.log("LOGIN API ERROR............", error)
+			console.log("LOGIN API ERROR............", error);
 			toast.error(error.response.data.message);
 			// toast.error(error.response.data.message)
 		}
@@ -110,7 +110,7 @@ export function logout() {
 		dispatch(setUser(null))
 		localStorage.removeItem("token")
 		localStorage.removeItem("user")
-		toast.success("Logged Out")
+		toast.success("Logged Out Successfully !!!")
 		//navigate("/")
 	}
 }
@@ -245,3 +245,26 @@ export function uploadImage(){
 	}
 }
 
+// export function getDashboardDetails(token){
+// 	return async(dispatch)=>{
+// 		const toastId = toast.loading("Loading...");
+
+// 		try{
+// 			//console.log("get_Dashboard_Details",DASHBOARD);
+// 			const response = await apiConnector("POST", DASHBOARD,{token});
+// 			//console.log("get_Dashboard_Details RESPONSE............", response);
+	
+// 			if (!response.data.success) {
+// 			  throw new Error(response.data.message)
+// 			}
+
+// 			toast.success(response.data.message);
+// 		}
+// 		catch(error){
+// 			console.log(error);
+// 			toast.error(error.response?.data?.message);
+// 			//toast.error('Something went wrong, please try again')
+// 		}
+// 		toast.dismiss(toastId);
+// 	}
+// }

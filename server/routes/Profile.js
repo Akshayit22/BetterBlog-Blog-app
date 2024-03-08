@@ -8,7 +8,7 @@ const {saveBlog} = require("../controllers/Profile");
 
 
 router.put('/updateProfile',AuthMid,updateProfile);
-router.get('/getUserDetails',AuthMid,getUserDetails);
+router.post('/getUserDetails',AuthMid,getUserDetails);
 router.put('/saveBlog',AuthMid,saveBlog)
 
 module.exports = router;

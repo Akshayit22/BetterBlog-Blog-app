@@ -20,7 +20,7 @@ router.post("/resetPassword",demo,resetPassword);
 router.put("/uploadImage",AuthMid,uploadImage);
 router.post("/contactUs",contactUs);
 
-router.get('/dashboard',AuthMid,dashboard);
+router.post('/dashboard',AuthMid,dashboard);
 
 
 

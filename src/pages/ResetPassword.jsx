@@ -57,15 +57,15 @@ const ResetPassword = () => {
 	}
 
 	return (
-		<div className='items-center justify-center mx-auto mt-10 w-[300px]'>
+		<div className='flex flex-col items-center justify-center mx-auto mt-10 w-[80vw] '>
 			{/* <div className='pb-[50px]'>
 				<Navbar></Navbar>
 			</div> */}
 			<h1 className='text-center text-xl'>Reset Password Page</h1>
 
-			<form className='flex flex-col' onSubmit={handleSubmit(handleSubmitResetPassword)}>
+			<form className='flex flex-col mt-5' onSubmit={handleSubmit(handleSubmitResetPassword)}>
 				{/* Email */}
-				<div className=' flex flex-col'>
+				<div className=' flex flex-col w-fit'>
 					<label htmlFor='email'>Email :</label>
 					<input type='email' id='email' name='email'
 						className='bg-richblack-50 text-black p-1 rounded-md text-lg'
@@ -76,16 +76,18 @@ const ResetPassword = () => {
 						}
 					</input>
 				</div>
-				<div className='mt-5 '>
+				<div className='mt-5'>
 					{
 						otpsent? 
 							<label>Wait for Resending Otp...</label>
 						:
-							<label onClick={handleOtp} className='bg-richblack-600 p-3 rounded-md h-5 hover:bg-richblack-700 transition:0.5s'>Send OTP</label>
+							// <botton onClick={handleOtp} className='bg-richblack-600 rounded-md hover:bg-richblack-700 transition:0.5s w-10 h-10'>Send OTP</botton>
+							<button onClick={handleOtp} className='bg-richblack-600  rounded-md h-8 hover:bg-richblack-700 transition:0.5s w-[35vw] md:w-[10vw] lg:w-[10vw]'>Send OTP</button>
+							
 					}
 				</div>
 
-				<div className='mt-5 flex flex-col mb-2'>
+				<div className='mt-5 flex flex-col mb-2 w-fit'>
 					<label>Enter OTP :</label>
 					<input type='text' id='otp' name='otp' 
 						className='bg-richblack-50 text-black p-1 rounded-md text-lg'
@@ -97,7 +99,7 @@ const ResetPassword = () => {
 				</div>
 
 				{/* password */}
-				<div className='flex flex-col mb-3'>
+				<div className='flex flex-col mb-3 w-fit'>
 					<label>Password :</label>
 					<input type='password' id='password' name='password' 
 						className='bg-richblack-50 text-black p-1 rounded-md text-lg'
@@ -108,7 +110,7 @@ const ResetPassword = () => {
 					</input>
 				</div>
 				{/* confirm Password */}
-				<div className=' flex flex-col mb-10'>
+				<div className=' flex flex-col mb-10 w-fit'>
 					<label>Confirm password :</label>
 					<input type='password' id='confirmPassword' name='confirmPassword' 
 						className='bg-richblack-50 text-black p-1 rounded-md text-lg'
@@ -119,14 +121,14 @@ const ResetPassword = () => {
 					</input>
 				</div>
 				
-				<button type='submit' className='bg-richblack-600 p-3 rounded-md h-10 hover:bg-richblack-700 transition:0.5s'>Reset Password</button>
+				<button type='submit' className='bg-richblack-600 p-3 rounded-md  hover:bg-richblack-700 transition:0.5s w-fit'>Reset Password</button>
 			</form>
 
-			<div className='bg-richblack-5 h-[2px] mt-10'></div>
+			<div className='bg-richblack-5 h-[2px] mt-5 md:w-[40%] w-full'></div>
 
 			<div className='mt-10 mb-5'>
 				
-				<Link to={'/user-auth'} className='bg-richblack-600 p-3 rounded-md h-5 hover:bg-richblack-700 transition:0.5s'>Sign Up</Link>
+				<button onClick={()=> Navigate('/user-auth')} className='bg-richblack-600  rounded-md h-10 hover:bg-richblack-700 transition:0.5s w-[50vw] md:w-[5vw] lg:w-[5vw]'>Sign Up</button>
 			</div>
 
 		</div>

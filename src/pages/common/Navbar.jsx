@@ -1,19 +1,26 @@
 import React, { useState } from 'react'
 import { CiMenuBurger } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { logout } from '../../Services/operations/apiAuth';
 const Navbar = ({getstarted=true}) => {
 
-	let [open, setOpen] =useState(false);
+	let [open, setOpen] = useState(false);
 	const Navigate = useNavigate();
+	const dispatch = useDispatch();
 	getstarted = getstarted?true:false;
+
+	const logoutFunc = () =>{
+		dispatch(logout());
+		Navigate('/');
+	}
 
 	let Links =[
 		{name:"home",link:"/home"},
 		{name:"profile",link:"/dashboard"},
 		{name:"about",link:"/"},
-		{name:"contact us",link:"/"},
+		{name:"contact us",link:"/contactUs"},
 	      ];
 	
 
@@ -42,8 +49,8 @@ const Navbar = ({getstarted=true}) => {
 					}
 					{
 						getstarted===true?
-						<button onClick={()=>{Navigate('/user-auth')}} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static' >Get Started</button>
-						:<div></div>
+						<button onClick={()=> Navigate('/user-auth')} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static' >Get Started</button>
+						:<button onClick={()=>logoutFunc()} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static' >Log Out</button>
 					}
 					
 				</ul>
