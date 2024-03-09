@@ -11,13 +11,14 @@ import { useSelector } from 'react-redux';
 import Blog from './pages/blog/blog';
 import Footer from './pages/common/Footer';
 import ContactUs from './pages/common/ContactUs';
+import About from './pages/common/About';
 
 function App() {
   const { user } = useSelector((state) => state.profile);
   const isLoggedIn = user == null ? true : false;
 
   return (
-    <div className='w-screen min-h-screen bg-richblack-900 flex flex-col text-white'>
+    <div className=' lg:w-[98.9vw]  min-h-screen bg-richblack-900 flex flex-col text-white '>
 
       <div className='pb-[70px]'>
 
@@ -32,6 +33,7 @@ function App() {
         <Route path='/home' element={<Home></Home>}></Route>
 
         <Route path='/contactUs' element={<ContactUs></ContactUs>} ></Route>
+        <Route path='/about' element={<About></About>} ></Route>
 
         <Route path='/resetPassword' element={<OpenRoute><ResetPassword /></OpenRoute>} />
 

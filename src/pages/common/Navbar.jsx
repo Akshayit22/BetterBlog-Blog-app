@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiMenuBurger } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../../Services/operations/apiAuth';
 const Navbar = ({getstarted=true}) => {
 
 	let [open, setOpen] = useState(false);
 	const Navigate = useNavigate();
 	const dispatch = useDispatch();
+	const location = useLocation();
 	getstarted = getstarted?true:false;
 
 	const logoutFunc = () =>{
@@ -19,14 +20,16 @@ const Navbar = ({getstarted=true}) => {
 	let Links =[
 		{name:"home",link:"/home"},
 		{name:"profile",link:"/dashboard"},
-		{name:"about",link:"/"},
+		{name:"about",link:"/about"},
 		{name:"contact us",link:"/contactUs"},
 	      ];
 	
-
+	useEffect(()=>{
+		setOpen(false);
+	},[location]);
 
 	return (
-		<div className='shadow-md w-full fixed top-0 left-0 '>
+		<div className='shadow-md w-full fixed top-0 left-0'>
 			<div className='md:flex items-center justify-between bg-richblack-700 py-4 md:px-10 px-7'>
 				{/* logo  */}
 				<div className='font-bold text-2xl cursor-pointer flex items-center gap-1' onClick={()=>Navigate('/home')}>
@@ -50,7 +53,7 @@ const Navbar = ({getstarted=true}) => {
 					{
 						getstarted===true?
 						<button onClick={()=> Navigate('/user-auth')} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static' >Get Started</button>
-						:<button onClick={()=>logoutFunc()} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static' >Log Out</button>
+						:<button onClick={()=>logoutFunc()} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded  duration-500 hover:bg-blue-800 md:static' >Log Out</button>
 					}
 					
 				</ul>

@@ -9,7 +9,7 @@
 }
 
 .container h2 {
-	padding-top: 2vw;
+	padding-top: 1vw;
 	color: #ffffff;
 	text-shadow: 5px 5px 9px black;
 }
@@ -59,7 +59,7 @@
 	padding-top: 1rem;
 }
 
-.formBtn .btn {
+.formBtn .button {
 	transition: 0.5s;
 	border: none;
 	font-size: 1rem;
@@ -76,8 +76,7 @@
 
 /* btn */
 
-.btn {
-	width: fit-content;
+.button {
 	color: rgb(0, 0, 0);
 	padding: 0.8rem 2.3rem;
 	box-shadow: 5px 5px 7px 5px #0000003f;
@@ -90,10 +89,10 @@
 	z-index: 1;
       }
       
-      .btn::before {
+      .button::before {
 	content: "";
 	position: absolute;
-	background-color: #292d4b;
+	background-color: #181d47;
 	top: 0px;
 	left: 0;
 	right: 0;
@@ -104,12 +103,12 @@
 	transition: all 0.8s;
       }
       
-      .btn:hover::before {
+      .button:hover::before {
 	transform: scaleX(1);
       }
       
-      .btn:hover {
-	border: solid 3px #e84949;
+      .button:hover {
+	border: none;
 	color: black;
       }
       
