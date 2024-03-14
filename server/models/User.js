@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
 		},
 		image:{
 			type:String,
+			require:true,
 		},
 		additionalDetails: {
 			type: mongoose.Schema.Types.ObjectId,

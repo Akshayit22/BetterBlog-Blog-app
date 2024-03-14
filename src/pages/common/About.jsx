@@ -13,7 +13,7 @@ function About() {
 				<div className="sm:w-1/2 p-5">
 					<div className="text">
 						<span className="text-gray-500 border-b-2 border-indigo-600 uppercase">About us</span>
-						<h2 className="my-4 font-bold text-3xl  sm:text-4xl ">About <span class="text-indigo-600">This Project.</span>
+						<h2 className="my-4 font-bold text-3xl  sm:text-4xl ">About <span className="text-indigo-600">This Project.</span>
 						</h2>
 						<p className="text-gray-700">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, commodi

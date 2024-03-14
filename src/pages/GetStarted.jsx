@@ -50,7 +50,7 @@ const GetStarted = () => {
 
 	return (
 
-		<div className='w-full'>
+		<div className='h-screen'>
 			
 			<div className='items-center justify-center mx-auto mt-10 lg:w-[40%] md:w-[60%]'>
 				<div className='flex flex-row bg-richblack-700 justify-around py-3 text-lg'>

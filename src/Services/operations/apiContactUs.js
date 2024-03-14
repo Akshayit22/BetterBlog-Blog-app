@@ -21,9 +21,9 @@ export function contactUs(name,email,body){
 			toast.success('Information Store Successfully, Thank You!!!');
 		}
 		catch(error){
+			console.log(error);
 			toast.error(error.response.data.message);
 			//toast.error('Something went wrong, please try again')
-			console.log(error);
 		}
 
 		toast.dismiss(toastId);

@@ -6,16 +6,18 @@ const { UPDATE_PROFILE_API, GET_PROFILE_DETAILS_API, SAVE_BLOG_IN_PROFILE_API } 
 
 import {setProfileDetails,setUserBlogs} from '../../redux/slices/profileSlice';
 
-export function updateProfile(gender, about, contact,token) {
+export function updateProfile(about, gender, contact,token) {
 	return async (dispatch) => {
 		const toastId = toast.loading("Loading...");
 
 		try {
 			console.log("UPDATE_PROFILE_API", UPDATE_PROFILE_API);
 
-			const response = await apiConnector("POST",UPDATE_PROFILE_API,{gender, about, contact,token});
+			const response = await apiConnector("PUT",UPDATE_PROFILE_API,{gender, about, contact,token},{
+				Authorisation: `Bearer ${token}`,
+			});
 
-			
+			console.log(response);			
 
 			if (!response.data.success) {
 				throw new Error(response.data.message)
@@ -23,13 +25,13 @@ export function updateProfile(gender, about, contact,token) {
 
 			toast.success(response.data.message);
 
-			getProfile(token);
+			dispatch(getProfile(token));
 
 		}
 		catch (error) {
-			toast.error(error.response.data.message);
-			//toast.error('Something went wrong, please try again')
 			console.log(error);
+			toast.error(error?.response?.data?.message);
+			//toast.error('Something went wrong, please try again')
 		}
 
 		toast.dismiss(toastId);
@@ -41,9 +43,11 @@ export function getProfile(token) {
 		const toastId = toast.loading("Loading...");
 
 		try {
-			console.log("GET_PROFILE_DETAILS_API", GET_PROFILE_DETAILS_API );
+			console.log("GET_PROFILE_DETAILS_API", GET_PROFILE_DETAILS_API);
 
-			const response = await apiConnector("POST",GET_PROFILE_DETAILS_API,{token});
+			const response = await apiConnector("POST", GET_PROFILE_DETAILS_API, {token}, {
+				Authorisation: `Bearer ${token}`,
+			});
 			//console.log("GET_PROFILE_DETAILS_API",response);
 			
 			//dispatch(getDashboardDetails(token));

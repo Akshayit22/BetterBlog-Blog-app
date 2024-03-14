@@ -24,7 +24,7 @@ function login(email, password, navigate) {
 			
 			// login success toast
 			// get User data in response.data.user
-			dispatch(setToken(JSON.stringify(response.data.token)))
+			dispatch(setToken(JSON.stringify(response.data.token).toString().replaceAll('"','')))
 			dispatch(setUser({ ...response.data.user,}))
 
 			localStorage.setItem("user", JSON.stringify(response.data.user))

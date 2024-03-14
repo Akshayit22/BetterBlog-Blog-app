@@ -39,9 +39,10 @@ exports.signup = async (req, res) => {
 			contact: null,
 		});
 
+		const image = `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`;
+
 		const user = await User.create({
-			firstName, lastName, email, password: HashedPassword,
-			image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+			firstName, lastName, email, password: HashedPassword,image,
 			additionalDetails: profileDetails,
 		});
 
@@ -85,11 +86,11 @@ exports.login = async (req, res) => {
 		}
 
 		if (await bcrypt.compare(password, user.password)) {
-			const token = jwt.sign({ email: user.email, id: user._id },
+			var token = jwt.sign({ email: user.email, id: user._id },
 				process.env.JWT_SECRET,
 				{ expiresIn: '3h', }
 			);
-
+			
 			user.token = token;
 			user.password = undefined;
 
@@ -100,8 +101,8 @@ exports.login = async (req, res) => {
 
 			return res.cookie('token', token, options).status(200).json({
 				success: true,
-				token:token,
-				user:user,
+				token,
+				user,
 				message: 'User Login Success',
 			})
 
@@ -349,7 +350,7 @@ exports.contactUs = async(req,res) =>{
 		console.log("contact us form sumbitted successfully.");
 
 		return res.status(200).json({
-			success: false,
+			success: true,
 			response : resp,
 			message: "contact us form sumbitted successfully.",
 		});		
