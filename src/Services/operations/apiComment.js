@@ -22,9 +22,9 @@ export function createComment(blogId,body,token){
 			dispatch(getBlog(blogId));
 		}
 		catch(error){
-			toast.error(error.response.data.message);
-			//toast.error('Something went wrong, please try again')
 			console.log(error);
+			toast.error(error?.response?.data.message);
+			//toast.error('Something went wrong, please try again')
 		}
 
 		toast.dismiss(toastId);
@@ -47,9 +47,9 @@ export function updateComment(CommentId,body,token){
 			dispatch(getBlog(response.data.updatedComment.blog));
 		}
 		catch(error){
-			toast.error(error.response.data.message);
-			//toast.error('Something went wrong, please try again')
 			console.log(error);
+			toast.error(error?.response?.data.message);
+			//toast.error('Something went wrong, please try again')
 		}
 
 		toast.dismiss(toastId);
@@ -72,9 +72,9 @@ export function deleteComment(blogId,commentId,token){
 			dispatch(getBlog(blogId));
 		}
 		catch(error){
-			toast.error(error.response.data.message);
-			//toast.error('Something went wrong, please try again')
 			console.log(error);
+			toast.error(error?.response?.data.message);
+			//toast.error('Something went wrong, please try again')
 		}
 
 		toast.dismiss(toastId);

@@ -37,7 +37,7 @@ const Navbar = ({getstarted=true}) => {
 					<span>Better Blog{":)"}</span>
 				</div>
 				{/* Menu icon */}
-				<div onClick={() => setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
+				<div onClick={() => setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7 text-3xl'>
 					{
 						open ? <RxCross1 /> : <CiMenuBurger />
 					}

@@ -169,7 +169,15 @@ exports.getBlog = async(req,res) =>{
 			});
 		}
 
-		const BlogDetails  = await Blog.findById({_id:id}).populate('user').populate('comments');
+		const BlogDetails  = await await Blog.find({_id:id})
+				.populate("user")
+				.populate({
+					path:'comments',
+					populate:{
+						path:'user',
+					}
+				})
+				.exec();
 
 		if(!BlogDetails){
 			return res.status(300).send({

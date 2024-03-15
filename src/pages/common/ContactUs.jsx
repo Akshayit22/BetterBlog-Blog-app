@@ -37,11 +37,11 @@ function ContactUs() {
 
 	return (
 		<div>
-			<section className="contactMeSection bg-richblack-600" id="contactMe">
+			<section className="contactMeSection text-white p-2" id="contactMe">
 				<div className="container" >
 
-					<h2 className='text-[2.5rem] md:text-[5rem]'>Contact Us</h2>
-					<h3 className='text-[1.5rem] md:text-[3rem]'>Questions, Thoughts, Or Just Want To Say Hello?</h3>
+					<h2 className='text-[2.5rem] '>Contact Us</h2>
+					<h3 className='text-[1.5rem] '>Questions, Thoughts, Or Just Want To Say Hello?</h3>
 					{
 						isSubmitSuccessful === true ?
 							(
@@ -52,19 +52,19 @@ function ContactUs() {
 							(<div></div>)
 					}
 
-					<div className="flex items-center justify-center p-12">
+					<div className="flex items-center justify-center p-5">
 						
 						<div className="mx-auto w-full max-w-[550px]">
 							<form onSubmit={handleSubmit(handleContactUs)}>
 								<div className="mb-5">
-									<label htmlFor="name" className="mb-3 block text-base font-medium text-[#07074D]">
+									<label htmlFor="name" className="mb-3 block text-base font-medium">
 										Full Name
 									</label> 
 									<input type="text" name="name" id="name" placeholder="Full Name" {...register('name')}
 										className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
 								</div>
 								<div className="mb-5">
-									<label htmlFor="email" className="mb-3 block text-base font-medium text-[#07074D]">
+									<label htmlFor="email" className="mb-3 block text-base font-medium ">
 										Email Address
 									</label>
 									<input type="email" name="email" id="email" placeholder="example@domain.com" {...register('email')}
@@ -72,7 +72,7 @@ function ContactUs() {
 								</div>
 								
 								<div className="mb-5">
-									<label htmlFor="message" className="mb-3 block text-base font-medium text-[#07074D]">
+									<label htmlFor="message" className="mb-3 block text-base font-medium ">
 										Message
 									</label>
 									<textarea rows="4" name="message" id="message" placeholder="Type your message" {...register('body')}

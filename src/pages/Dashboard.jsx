@@ -21,8 +21,6 @@ const Dashboard = () => {
 	let { register, handleSubmit, reset,
 		formState: { errors, isSubmitSuccessful } } = useForm();
 
-	// const defaultData = {contact:profileDetails.additionalDetails.contact || '' , about : profileDetails.additionalDetails.about || ''}
-
 	const toggleModal = () => {
 		setOpenModal(!openModal);
 	}
@@ -43,7 +41,7 @@ const Dashboard = () => {
 	}
 
 	useEffect(() => {
-		if(!profileDetails || !UserBlogs){
+		if (!profileDetails || !UserBlogs) {
 			dispatch(getProfile(token));
 		}
 		console.log("profileDetails", profileDetails);
@@ -58,9 +56,9 @@ const Dashboard = () => {
 			{
 				openModal ?
 					(
-						<div className="h-screen w-full flex justify-center items-center  bg-gray-800 absolute z-50 bg-richblack-200 overflow-x-hidden">
-							<div className="bg-richblack-500 p-5 m-10 rounded-3xl shadow-lg text-black">
-								<MdClose className='text-3xl top' onClick={() => toggleModal()}></MdClose>
+						<div className="h-screen w-full flex justify-center items-center  bg-gray-800 absolute bg-richblack-900 overflow-x-hidden z-15">
+							<div className="bg-richblack-500 p-5 m-10 rounded-3xl shadow-lg text-black relative">
+								<MdClose className='text-3xl top-0 right-0 absolute m-3' onClick={() => toggleModal()}></MdClose>
 								<form onSubmit={handleSubmit(handleProfileData)}>
 
 									<div className="flex justify-center mb-3 mt-5 flex-col">
@@ -130,23 +128,23 @@ const Dashboard = () => {
 							{
 								UserBlogs.map((blog, index) => (
 
-									<div key={index} onClick={() => { navigate(`/blog/${blog._id}`) }} className='bg-richblack-500 hover:cursor-pointer rounded-md p-3 m-3 md:w-[28%] h-fit flex flex-row'>
+									<div key={index} onClick={() => { navigate(`/blog/${blog._id}`) }} className='bg-richblack-500 hover:cursor-pointer rounded-md p-3 m-3 md:w-[30%] h-fit flex flex-row w-full'>
 
 										<div className='flex gap-3 h-fit'>
-											<img src={blog.image} className='rounded-sm w-[100px] h-[100px]'></img>
+											<img src={blog.image} width={"100px"} className='rounded-sm h-[100px]'></img>
 											<div>
-												<p className='lg:text-lg wrap font-bold'>{blog.title}</p>
-												<div className='flex flex-col flex-wrap lg:flex-row lg:flex-wrap'>
-													<p className='lg:text-lg mt-1 font-bold'>{"category: "}</p>
+												<p className='text-lg wrap font-bold text-richblack-800'>{blog.title.substring(0, 55) + "..."}</p>
+												<div className='flex flex-wrap lg:flex-row lg:flex-wrap gap-1'>
+													<p className='lg:text-lg mt-1 font-bold text-richblack-700'>{"category: "}</p>
 													{
 														blog.category.map((c, i) => (
-															<p key={i} className='lg:text-md bg-richblack-400 m-1 p-1 rounded-md'>{c}</p>
+															<p key={i} className='lg:text-md font-bold bg-richblack-400 p-1 rounded-md w-fit'>{c}</p>
 														))
 													}
 												</div>
 
 												<div>
-													<p className='font-bold'>Comments: <span className='font-bold'>{blog.comments?.length}</span></p>
+													<p className='font-bold text-richblack-700'>Comments: <span className='font-bold text-white'>{blog.comments?.length}</span></p>
 
 												</div>
 
@@ -177,23 +175,23 @@ const Dashboard = () => {
 						<div className='flex flex-wrap p-1 justify-start'>
 							{
 								profileDetails.savedBlogs.map((blog, index) => (
-									<div key={index} onClick={() => { navigate(`/blog/${blog._id}`) }} className='bg-richblack-500 hover:cursor-pointer rounded-md p-3 m-3 md:w-[28%] h-fit flex flex-row'>
+									<div key={index} onClick={() => { navigate(`/blog/${blog._id}`) }} className='bg-richblack-500 hover:cursor-pointer rounded-md p-3 m-3 md:w-[30%] h-fit flex flex-row w-full'>
 
 										<div className='flex gap-3 h-fit'>
 											<img src={blog.image} width={"100px"} className='rounded-sm h-[100px]'></img>
 											<div>
-												<p className='text-lg wrap font-bold'>{blog.title}</p>
-												<div className='flex flex-col flex-wrap lg:flex-row lg:flex-wrap'>
-													<p className='lg:text-lg font-bold mt-1'>{"category: "}</p>
+												<p className='text-lg wrap font-bold text-richblack-800'>{blog.title.substring(0, 55) + "..."}</p>
+												<div className='flex flex-wrap lg:flex-row lg:flex-wrap gap-1'>
+													<p className='lg:text-lg mt-1 font-bold text-richblack-700'>{"category: "}</p>
 													{
 														blog.category.map((c, i) => (
-															<p key={i} className='lg:text-md bg-richblack-400 m-1 p-1 rounded-md'>{c}</p>
+															<p key={i} className='lg:text-md font-bold bg-richblack-400 p-1 rounded-md w-fit'>{c}</p>
 														))
 													}
 												</div>
 
 												<div>
-													<p className='font-bold'>Comments: <span className='font-bold'>{blog.comments?.length}</span></p>
+													<p className='font-bold text-richblack-700'>Comments: <span className='font-bold text-white'>{blog.comments?.length}</span></p>
 
 												</div>
 

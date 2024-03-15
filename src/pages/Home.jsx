@@ -16,8 +16,7 @@ const Home = () => {
 	}, []);
 
 	return (
-		<div className='h-screen'>
-			<p>Home</p>
+		<div className='min-h-screen'>
 			{
 
 				loading ? <Spinner></Spinner> : <AllBlogs></AllBlogs>
