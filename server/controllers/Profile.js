@@ -44,7 +44,15 @@ exports.getUserDetails = async(req,res) =>{
 		const {email,id} = req.user;
 
 		const UserDetails = await User.findById({_id:id})
-					.populate('additionalDetails').populate('savedBlogs').exec();
+					.populate('additionalDetails')
+					.populate('savedBlogs')
+					.populate({
+						path:'savedBlogs',
+						populate:{
+							path:'user',
+						}
+					})
+					.exec();
 
 		UserDetails.password = undefined;
 		const UserBlogs = await Blog.find({user:UserDetails._id})

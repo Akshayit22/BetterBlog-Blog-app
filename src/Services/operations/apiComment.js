@@ -31,20 +31,20 @@ export function createComment(blogId,body,token){
 	}
 }
 
-export function updateComment(CommentId,body,token){
+export function updateComment(commentId,body,token){
 	return async(dispatch)=>{
 		const toastId = toast.loading("Loading...");
 
 		try{
 			console.log("UPDATE_COMMENT_API",UPDATE_COMMENT_API);
 
-			const response = await apiConnector("POST",UPDATE_COMMENT_API,{CommentId,body,token})
+			const response = await apiConnector("POST",UPDATE_COMMENT_API,{commentId,body,token})
 
 			if (!response.data.success) {
 				throw new Error(response.data.message)
 			}
 			toast.success(response.data.message);
-			dispatch(getBlog(response.data.updatedComment.blog));
+			dispatch(getBlog(response.data.updatedComment.Blog));
 		}
 		catch(error){
 			console.log(error);

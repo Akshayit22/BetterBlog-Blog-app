@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProfile, updateProfile } from '../Services/operations/apiProfile';
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
-import { MdClose } from "react-icons/md";
+import { MdClose, MdEdit, MdOutlineInsertComment } from "react-icons/md";
+
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { formatDate } from '../Services/formatDate';
 
 const Dashboard = () => {
 
@@ -40,6 +42,14 @@ const Dashboard = () => {
 		}
 	}
 
+	const HandleEditBlog = (blogId) => {
+		console.log("Edit Blog Handler", blogId);
+	}
+
+	const HandleCreateNewBlog = () => {
+		console.log("Handle Create New Blog",);
+	}
+
 	useEffect(() => {
 		if (!profileDetails || !UserBlogs) {
 			dispatch(getProfile(token));
@@ -58,7 +68,7 @@ const Dashboard = () => {
 					(
 						<div className="h-screen w-full flex justify-center items-center  bg-gray-800 absolute bg-richblack-900 overflow-x-hidden z-15">
 							<div className="bg-richblack-500 p-5 m-10 rounded-3xl shadow-lg text-black relative">
-								<MdClose className='text-3xl top-0 right-0 absolute m-3' onClick={() => toggleModal()}></MdClose>
+								<MdClose className='text-3xl top-0 right-0 absolute m-3 hover:cursor-pointer hover:bg-richblack-500' onClick={() => toggleModal()}></MdClose>
 								<form onSubmit={handleSubmit(handleProfileData)}>
 
 									<div className="flex justify-center mb-3 mt-5 flex-col">
@@ -86,13 +96,19 @@ const Dashboard = () => {
 					(<div></div>)
 			}
 
-			<h1 className='space-y-2 text-lg font-medium leading-6 text-indigo-300 p-5'>Welcome to Your Profile, </h1>
+			<h1 className='space-y-2 text-lg font-medium leading-6 text-indigo-300 p-3'>Welcome to Your Profile, </h1>
 			{
 				profileDetails !== null && openModal == false ? (
-					<div className='w-full flex justify-center '>
+					<div className=' w-full flex flex-col gap-10 items-center justify-evenly md:flex-row'>
+
+						<div className='flex bg-richblack-600  p-3 rounded-md hover:bg-richblack-700 cursor-pointer h-fit w-fit space-x-2' onClick={() => HandleCreateNewBlog()}>
+							<label className='text-xl'>Create New Blog </label>
+							<CiEdit className='text-2xl mt-1'></CiEdit>
+						</div>
+
 						<div className=" sm:w-[350px] md:w-[400px] px-6 py-6  text-center bg-gray-800 rounded-lg lg:mt-0 xl:px-10 bg-richblack-600 ">
 
-							<div className='relative hover:cursor-pointer'>
+							<div className='relative hover:cursor-pointer hover:text-richblack-400'>
 								<CiEdit className='text-3xl shadow-md absolute top-0 right-0' onClick={() => toggleModal()} />
 							</div>
 							<div className="space-y-4 xl:space-y-6 md:flex lg:flex">
@@ -117,45 +133,46 @@ const Dashboard = () => {
 					(<div></div>)
 			}
 
-			<h1 className='space-y-2 text-lg font-medium leading-6 text-indigo-300 p-5'>User Blogs</h1>
+			<hr className="border-gray-200 sm:mx-auto dark:border-gray-700 my-5" />
+			<h1 className='space-y-2 text-lg font-medium leading-6 text-indigo-300 p-3'>User Blogs</h1>
 
 			{
 				UserBlogs?.length > 0 && openModal == false ?
 					(
-						<div className='flex flex-wrap p-1 justify-start'>
-
+						<div className='mx-auto mt-4 grid max-w-lg gap-10 lg:max-w-none lg:grid-cols-3 md:grid-cols-2  p-5'>
 
 							{
 								UserBlogs.map((blog, index) => (
 
-									<div key={index} onClick={() => { navigate(`/blog/${blog._id}`) }} className='bg-richblack-500 hover:cursor-pointer rounded-md p-3 m-3 md:w-[30%] h-fit flex flex-row w-full'>
+									<div className="flex flex-col overflow-hidden rounded-md shadow-lg shadow-richblack-700 border border-richblack-300" key={index}>
 
-										<div className='flex gap-3 h-fit'>
-											<img src={blog.image} width={"100px"} className='rounded-sm h-[100px]'></img>
-											<div>
-												<p className='text-lg wrap font-bold text-richblack-800'>{blog.title.substring(0, 55) + "..."}</p>
-												<div className='flex flex-wrap lg:flex-row lg:flex-wrap gap-1'>
-													<p className='lg:text-lg mt-1 font-bold text-richblack-700'>{"category: "}</p>
-													{
-														blog.category.map((c, i) => (
-															<p key={i} className='lg:text-md font-bold bg-richblack-400 p-1 rounded-md w-fit'>{c}</p>
-														))
-													}
+										<div className="flex-shrink-0">
+											<img className="h-45 w-full object-cover" src={blog.image} alt="img" loading='lazy'></img>
+										</div>
+										<div className="flex flex-1 flex-col justify-between p-3 bg-richblack-600">
+											<div className="flex-1">
+
+												<a onClick={() => navigate(`/blog/${blog._id}`)} className="mt-1 block hover:cursor-pointer hover:underline">
+													<p className="text-xl font-semibold ">{blog.title.substring(0, 70)}<span>{blog.title.length > 70 ? "..." : ""}</span></p>
+
+												</a>
+
+												{/* <p className="mt-2 text-base text-gray-500 text-richblack-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta, eum aliquid? Eaque quae sint at minus autem provident et doloremque eius cumque nesciunt tempora saepe quos modi, nostrum, ab quis.</p> */}
+
+
+											</div>
+											<div className="mt-5 flex justify-between">
+												<div className='flex flex-row'>
+													<MdOutlineInsertComment className='text-2xl m-2' />
+													<span className='mt-1 text-1xl'> {blog.comments.length}</span>
 												</div>
-
-												<div>
-													<p className='font-bold text-richblack-700'>Comments: <span className='font-bold text-white'>{blog.comments?.length}</span></p>
-
+												<div className='flex bg-richblack-800 mr-5 p-2 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => HandleEditBlog(blog._id)}>
+													<label>Edit</label>
+													<CiEdit className='text-2xl'></CiEdit>
 												</div>
 
 											</div>
 										</div>
-
-
-
-
-
-
 									</div>
 
 								))
@@ -167,46 +184,64 @@ const Dashboard = () => {
 					(<div className='space-y-2 text-md font-medium leading-6 text-richblack-300  p-5'>No Blog Created</div>)
 			}
 
-			<h1 className='space-y-2 text-lg font-medium leading-6 text-indigo-300 p-5'>User Saved Blogs</h1>
+			<hr className="border-gray-200 sm:mx-auto dark:border-gray-700 my-5" />
+			<h1 className='space-y-2 text-lg font-medium leading-6 text-indigo-300 p-3'>User Saved Blogs</h1>
+
 
 			{
 				profileDetails?.savedBlogs?.length > 0 && openModal == false ?
 					(
-						<div className='flex flex-wrap p-1 justify-start'>
+						<div className='mx-auto mt-4 grid max-w-lg gap-10 lg:max-w-none lg:grid-cols-3 md:grid-cols-2  p-5'>
 							{
 								profileDetails.savedBlogs.map((blog, index) => (
-									<div key={index} onClick={() => { navigate(`/blog/${blog._id}`) }} className='bg-richblack-500 hover:cursor-pointer rounded-md p-3 m-3 md:w-[30%] h-fit flex flex-row w-full'>
+									<div className="flex flex-col overflow-hidden rounded-md shadow-lg shadow-richblack-700 border border-richblack-300" key={index}>
 
-										<div className='flex gap-3 h-fit'>
-											<img src={blog.image} width={"100px"} className='rounded-sm h-[100px]'></img>
-											<div>
-												<p className='text-lg wrap font-bold text-richblack-800'>{blog.title.substring(0, 55) + "..."}</p>
-												<div className='flex flex-wrap lg:flex-row lg:flex-wrap gap-1'>
-													<p className='lg:text-lg mt-1 font-bold text-richblack-700'>{"category: "}</p>
-													{
-														blog.category.map((c, i) => (
-															<p key={i} className='lg:text-md font-bold bg-richblack-400 p-1 rounded-md w-fit'>{c}</p>
-														))
-													}
-												</div>
+										<div className="flex-shrink-0">
+											<img className="h-50 w-full object-cover" src={blog.image} alt="img" loading='lazy'></img>
+										</div>
+										<div className="flex flex-1 flex-col justify-between p-3">
+											<div className="flex-1">
 
-												<div>
-													<p className='font-bold text-richblack-700'>Comments: <span className='font-bold text-white'>{blog.comments?.length}</span></p>
+												<a onClick={() => navigate(`/blog/${blog._id}`)} className="mt-1 block hover:cursor-pointer hover:underline">
+													<p className="text-xl font-semibold ">{blog.title.substring(0, 70)}<span>{blog.title.length > 70 ? "..." : ""}</span></p>
 
-												</div>
+												</a>
+
+												<p className="mt-2 text-base text-gray-500 text-richblack-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta, eum aliquid? Eaque quae sint at minus autem provident et doloremque eius cumque nesciunt tempora saepe quos modi, nostrum, ab quis.</p>
+
 
 											</div>
+											<div className="mt-5 flex justify-between">
+												<div className=' flex items-center'>
+													<div className="flex-shrink-0">
+														<img className="h-12 w-12 rounded-full" src={blog.user.image ? blog.user.image : `https://api.dicebear.com/5.x/initials/svg?seed=${blog.user.firstName} ${blog.user.lastName}`} alt="user"></img>
+													</div>
+													<div className="ml-3">
+														<p className="text-sm font-medium text-gray-900">
+															<a className="hover:underline hover:cursor-pointer">{blog.user.firstName + " " + blog.user.lastName}</a>
+														</p>
+														<div className="flex flex-col space-x-1 text-xs text-gray-500">
+															<span>{formatDate(blog.createdAt)}</span>
+														</div>
+													</div>
+												</div>
+												<div className='flex flex-row'>
+													<MdOutlineInsertComment className='text-2xl m-2' />
+													<span className='mt-1 text-1xl'> {blog.comments.length}</span>
+												</div>
+											</div>
 										</div>
-
 									</div>
 								))
 							}
 						</div>
+
 					) :
 					(
 						<div className='space-y-2 text-md font-medium leading-6 text-richblack-300 p-5'>Nothing saved here</div>
 					)
 			}
+
 
 		</div>
 	)

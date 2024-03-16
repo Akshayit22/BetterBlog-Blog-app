@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { formatDate } from '../../Services/formatDate';
-import img1 from '../../../Public/Blog_thumnails_5.jpg';
 import { MdOutlineInsertComment } from "react-icons/md";
 
 function AllBlogs() {

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getBlog } from '../../Services/operations/apiBlog';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Spinner from '../../Component/Commen/Spinner';
 import { formatDate } from '../../Services/formatDate';
 import { CiEdit } from "react-icons/ci";
-import { MdAddComment, MdKeyboardBackspace, MdDelete } from "react-icons/md";
-import { toast } from 'react-toastify';
-import {createComment,deleteComment} from '../../Services/operations/apiComment';
+import {  MdKeyboardBackspace } from "react-icons/md";
 import Comment from '../comment/Comment';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Blog = () => {
 
@@ -19,36 +17,12 @@ const Blog = () => {
 	const [loading, setLoading] = useState(false);
 	const { OneBlog } = useSelector((state) => state.blog);
 	const { user } = useSelector((state) => state.profile);
-	const {token} = useSelector((state)=> state.auth);
+	const { token } = useSelector((state) => state.auth);
 	const ID = location.pathname.split("/").at(-1);
-	const SingleBlog = OneBlog.length>0? OneBlog[0]: null ;
+	const SingleBlog = OneBlog.length > 0 ? OneBlog[0] : null;
 
 	//console.log("printing SingleBlog: ", SingleBlog);
 
-	const AddComment = (e) =>{
-		e.preventDefault();
-		const CommentBody = e.target.textArea.value
-		if(CommentBody=== ''){
-			toast.error("Comment can't be Empty !!!")
-			return;
-		}
-		else if(user==null){
-			toast.error("Login first to Create Comment !!!")
-		}
-		else{
-			dispatch(createComment(SingleBlog._id, CommentBody, token));
-			toast.success("Comment Create Successfully !!!");
-			dispatch(getBlog(ID));
-		}
-	}
-
-	const deleteCommentHandler = (CId) =>{
-		console.log("comment");
-		dispatch(deleteComment(SingleBlog._id, CId, token));
-		toast.success("Comment Deleted Successfully !!!");
-		navigate(`/blog/${ID}`);
-		return;
-	}
 
 	useEffect(() => {
 		setLoading(true);
@@ -57,7 +31,7 @@ const Blog = () => {
 
 		console.log(SingleBlog);
 		console.log(user);
-		
+
 	}, []);
 
 	return (
@@ -66,7 +40,7 @@ const Blog = () => {
 			{
 				loading ?
 					<Spinner></Spinner> :
-					SingleBlog !== null  ?
+					SingleBlog !== null ?
 						(
 							<div className='mt-2'>
 
@@ -147,6 +121,7 @@ const Blog = () => {
 										<hr className="border-gray-200 sm:mx-auto dark:border-gray-700 my-3" />
 
 										<Comment SingleBlog={SingleBlog}></Comment>
+										
 
 									</div>
 								</div>
