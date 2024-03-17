@@ -4,9 +4,11 @@ import { getBlog } from '../../Services/operations/apiBlog';
 import Spinner from '../../Component/Commen/Spinner';
 import { formatDate } from '../../Services/formatDate';
 import { CiEdit } from "react-icons/ci";
-import {  MdKeyboardBackspace } from "react-icons/md";
+import { MdKeyboardBackspace, MdSave } from "react-icons/md";
 import Comment from '../comment/Comment';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import {saveBlog} from '../../Services/operations/apiProfile';;
 
 const Blog = () => {
 
@@ -20,17 +22,27 @@ const Blog = () => {
 	const { token } = useSelector((state) => state.auth);
 	const ID = location.pathname.split("/").at(-1);
 	const SingleBlog = OneBlog.length > 0 ? OneBlog[0] : null;
+	var flag = true;
 
 	//console.log("printing SingleBlog: ", SingleBlog);
 
+	const HandleSaveBlog = (mode) =>{
+		if (user == null) {
+			toast.error("Login first to Save Blog !!!")
+		}else{
+			dispatch(saveBlog(SingleBlog._id,mode,token));
+			dispatch(getBlog(ID));
+			flag = !flag;w
+		}
+	}
 
 	useEffect(() => {
 		setLoading(true);
 		dispatch(getBlog(ID));
 		setLoading(false);
 
-		console.log(SingleBlog);
-		console.log(user);
+		console.log("single blog", SingleBlog);
+		console.log("user", user);
 
 	}, []);
 
@@ -49,18 +61,45 @@ const Blog = () => {
 										<MdKeyboardBackspace className='text-2xl' />
 										<label>Back</label>
 									</div>
-									{
-										SingleBlog?.user?._id == user?._id ?
-											(
-												<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer'>
-													<label>Edit</label>
-													<CiEdit className='text-2xl'></CiEdit>
-												</div>
-											) :
-											(
-												<p className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer'>Login to Create</p>
-											)
-									}
+
+									<div className='flex '>
+
+
+										{
+											user?.savedBlogs.includes(SingleBlog._id) && flag ?
+												(
+													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={()=> HandleSaveBlog('Unsave')}>
+														<label>UnSave</label>
+														<MdSave className='text-2xl' />
+													</div>
+												) :
+												(
+													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={()=> HandleSaveBlog('Save')}>
+														<label>Save</label>
+														<MdSave className='text-2xl' />
+													</div>
+												)
+										}
+
+										{
+											SingleBlog?.user?._id == user?._id ?
+												(
+
+													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer'>
+														<label>Edit</label>
+														<CiEdit className='text-2xl'></CiEdit>
+													</div>
+												) :
+												(
+													<p className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => navigate('/user-auth')}>Create Blog</p>
+												)
+										}
+
+
+
+									</div>
+
+
 								</div>
 								<hr className="border-gray-200 sm:mx-auto dark:border-gray-700 mt-3" />
 
@@ -121,7 +160,7 @@ const Blog = () => {
 										<hr className="border-gray-200 sm:mx-auto dark:border-gray-700 my-3" />
 
 										<Comment SingleBlog={SingleBlog}></Comment>
-										
+
 
 									</div>
 								</div>
@@ -131,7 +170,7 @@ const Blog = () => {
 							<h1 className='space-y-2 text-lg font-medium leading-6 text-indigo-300 p-5'>Blog Not Found</h1>
 						)
 			}
-		</div>
+		</div >
 
 	);
 }

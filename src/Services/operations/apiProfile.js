@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 
 const { UPDATE_PROFILE_API, GET_PROFILE_DETAILS_API, SAVE_BLOG_IN_PROFILE_API } = ProfileEndpoints;
 
-import {setProfileDetails,setUserBlogs} from '../../redux/slices/profileSlice';
+import {setProfileDetails,setUser,setUserBlogs} from '../../redux/slices/profileSlice';
 
 export function updateProfile(about, gender, contact,token) {
 	return async (dispatch) => {
