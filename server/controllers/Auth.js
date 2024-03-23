@@ -303,10 +303,14 @@ exports.CloudMail = async (req, res) => {
 
 exports.uploadImage = async(req,res) =>{
 	try{
-		if (req.files) {
+		console.log(req);
+
+		const thumbnail = req.files.thumbnailImage;
+
+		if (thumbnail) {
 			var url = '';
 			//Image Uploader
-			const Image = req.files.Image;
+			const Image = thumbnail;
 			const ImageUpload = await uploadImageToCloudinary(
 				Image,
 				process.env.FOLDER_NAME,

@@ -17,7 +17,7 @@ router.post("/signup",demo,signup);
 
 router.put("/otpGenerator",demo,otpGenerator);
 router.post("/resetPassword",demo,resetPassword);
-router.put("/uploadImage",AuthMid,uploadImage);
+router.post("/uploadImage",AuthMid,uploadImage);
 router.post("/contactUs",contactUs);
 
 router.post('/dashboard',AuthMid,dashboard);

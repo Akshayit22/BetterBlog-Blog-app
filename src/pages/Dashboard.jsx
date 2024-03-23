@@ -20,8 +20,7 @@ const Dashboard = () => {
 	const { profileDetails } = useSelector((state) => state.profile);
 	const { UserBlogs } = useSelector((state) => state.profile);
 
-	let { register, handleSubmit, reset,
-		formState: { errors, isSubmitSuccessful } } = useForm();
+	let { register, handleSubmit, reset,formState: { errors, isSubmitSuccessful } } = useForm();
 
 	const toggleModal = () => {
 		setOpenModal(!openModal);
@@ -40,14 +39,6 @@ const Dashboard = () => {
 			reset();
 			toggleModal();
 		}
-	}
-
-	const HandleEditBlog = (blogId) => {
-		console.log("Edit Blog Handler", blogId);
-	}
-
-	const HandleCreateNewBlog = () => {
-		console.log("Handle Create New Blog",);
 	}
 
 	useEffect(() => {
@@ -101,7 +92,7 @@ const Dashboard = () => {
 				profileDetails !== null && openModal == false ? (
 					<div className=' w-full flex flex-col gap-10 items-center justify-evenly md:flex-row'>
 
-						<div className='flex bg-richblack-600  p-3 rounded-md hover:bg-richblack-700 cursor-pointer h-fit w-fit space-x-2' onClick={() => HandleCreateNewBlog()}>
+						<div className='flex bg-richblack-600  p-3 rounded-md hover:bg-richblack-700 cursor-pointer h-fit w-fit space-x-2' onClick={() => navigate(`/createBlog`)}>
 							<label className='text-xl'>Create New Blog </label>
 							<CiEdit className='text-2xl mt-1'></CiEdit>
 						</div>
@@ -166,7 +157,7 @@ const Dashboard = () => {
 													<MdOutlineInsertComment className='text-2xl m-2' />
 													<span className='mt-1 text-1xl'> {blog.comments.length}</span>
 												</div>
-												<div className='flex bg-richblack-800 mr-5 p-2 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => HandleEditBlog(blog._id)}>
+												<div className='flex bg-richblack-800 mr-5 p-2 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => navigate(`/updateBlog/${blog._id}`)}>
 													<label>Edit</label>
 													<CiEdit className='text-2xl'></CiEdit>
 												</div>

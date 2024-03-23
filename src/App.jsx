@@ -12,6 +12,10 @@ import Blog from './pages/blog/blog';
 import Footer from './pages/common/Footer';
 import ContactUs from './pages/common/ContactUs';
 import About from './pages/common/About';
+import NewBlog from './pages/blog/BlogForm/NewBlog';
+import UpdatedBlog from './pages/blog/BlogForm/UpdatedBlog';
+
+import ImageUpload from './pages/blog/BlogFormComponents/ImageUpload';
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -26,9 +30,11 @@ function App() {
       </div>
 
       <Routes>
+        
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/user-auth' element={<GetStarted ></GetStarted>}></Route>
 
+        <Route path='/test' element={<ImageUpload/>}/>
 
         <Route path='/home' element={<Home></Home>}></Route>
 
@@ -39,7 +45,12 @@ function App() {
 
         <Route path='/blog/:id' element={<OpenRoute><Blog></Blog></OpenRoute>} />
 
-        <Route path='/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>}>
+        <Route path='/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>}/>
+         
+        <Route path='/createBlog' element={<PrivateRoute><NewBlog></NewBlog></PrivateRoute>}></Route>
+
+        <Route path='/updateBlog/:id' element={<PrivateRoute> <UpdatedBlog></UpdatedBlog> </PrivateRoute>} />
+
 
           {/* // all child routers under dashboard
 
@@ -80,7 +91,7 @@ function App() {
                   </>
                 )} 
           */}
-        </Route>
+        
 
         <Route path='*' element={<h1>Page Not Found 404</h1>}></Route>
       </Routes>

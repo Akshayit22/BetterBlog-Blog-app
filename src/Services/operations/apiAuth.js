@@ -219,26 +219,31 @@ export function signUp(
 */
 
 //UPLOAD_IMAGE_API : contains image in req.files and return the url in response
-export function uploadImage(){
+export function uploadImage(data,token){
 	return async(dispatch)=>{
 
 		const toastId = toast.loading("Image Uploading...")
 		try{
-			console.log("UPLOAD IMAGE RESPONSE",UPLOAD_IMAGE_API);
-			// const response = await apiConnector("POST", UPLOAD_IMAGE_API);
-			// //const response = {data:{success:true}};
-			// console.log("UPLOAD IMAGE RESPONSE............", response);
+			// const token = formData.token;
+			console.log("upload api :",token)
+			console.log("UPLOAD IMAGE :",UPLOAD_IMAGE_API);
+			const response = await apiConnector("POST", UPLOAD_IMAGE_API, data, {
+				"Content-Type": "multipart/form-data",
+				Authorisation: `Bearer ${token}`,
+			});
+			
+			console.log("UPLOAD IMAGE RESPONSE............", response);
 	
 			if (!response.data.success) {
 			  throw new Error(response.data.message)
 			}
 			
-			
+			toast.success("image uploaded successfully");
 		}
 		catch(error){
-			toast.error(error.response.data.message);
-			//toast.error('Something went wrong, please try again')
 			console.log(error);
+			toast.error(error?.response?.data.message);
+			//toast.error('Something went wrong, please try again')
 		}
 
 		toast.dismiss(toastId);

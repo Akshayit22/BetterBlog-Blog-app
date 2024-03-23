@@ -18,11 +18,12 @@ const Blog = () => {
 
 	const [loading, setLoading] = useState(false);
 	const { OneBlog } = useSelector((state) => state.blog);
-	const { user } = useSelector((state) => state.profile);
+	var { user } = useSelector((state) => state.profile);
 	const { token } = useSelector((state) => state.auth);
 	const ID = location.pathname.split("/").at(-1);
 	const SingleBlog = OneBlog.length > 0 ? OneBlog[0] : null;
 	var flag = true;
+	user = JSON.parse(user);
 
 	//console.log("printing SingleBlog: ", SingleBlog);
 
@@ -66,7 +67,7 @@ const Blog = () => {
 
 
 										{
-											user?.savedBlogs.includes(SingleBlog._id) && flag ?
+											user?.savedBlogs?.includes(SingleBlog._id) && flag ?
 												(
 													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={()=> HandleSaveBlog('Unsave')}>
 														<label>UnSave</label>
@@ -85,7 +86,7 @@ const Blog = () => {
 											SingleBlog?.user?._id == user?._id ?
 												(
 
-													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer'>
+													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => navigate(`/updateBlog/${SingleBlog._id}`)}>
 														<label>Edit</label>
 														<CiEdit className='text-2xl'></CiEdit>
 													</div>

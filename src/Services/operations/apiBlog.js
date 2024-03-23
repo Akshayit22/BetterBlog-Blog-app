@@ -2,18 +2,22 @@ import apiConnector from "../apiConnector";
 import { BlogEndpoints } from "../api";
 import { toast } from "react-hot-toast";
 
-const {CREATE_BLOG_API,UPDATE_BLOG_API,GET_ALL_BLOG_API,GET_BLOG_API,DELETE_BLOG_API} = BlogEndpoints;
+const { CREATE_BLOG_API, UPDATE_BLOG_API, GET_ALL_BLOG_API, GET_BLOG_API, DELETE_BLOG_API } = BlogEndpoints;
 
-import {addBlogs , addBlog} from '../../redux/slices/blogsSlice';
+import { addBlogs, addBlog } from '../../redux/slices/blogsSlice';
 
-
-export function createBlog(title,content,referenceLinks,category,token){
-	return async(dispatch)=>{
+//title,content,referenceLinks,category
+export function createBlog(data, token) {
+	return async (dispatch) => {
 		const toastId = toast.loading("Loading...");
 
-		try{
-			console.log("CREATE_BLOG_API",CREATE_BLOG_API);
-			const response = await apiConnector("POST", CREATE_BLOG_API, {title,content,referenceLinks,category,token});
+		try {
+			console.log("CREATE_BLOG_API", CREATE_BLOG_API);
+			const response = await apiConnector("POST", CREATE_BLOG_API, data, {
+				"Content-Type": "multipart/form-data",
+				Authorisation: `Bearer ${token}`,
+			});
+
 			//image in request.files
 			if (!response.data.success) {
 				throw new Error(response.data.message)
@@ -21,7 +25,7 @@ export function createBlog(title,content,referenceLinks,category,token){
 			//dispatch(editingBlog(reponse.data.data._id));
 			toast.success(response.data.message);
 		}
-		catch(error){
+		catch (error) {
 			toast.error(error.response.data.message);
 			//toast.error('Something went wrong, please try again')
 			console.log(error);
@@ -30,15 +34,18 @@ export function createBlog(title,content,referenceLinks,category,token){
 		toast.dismiss(toastId);
 	}
 }
-
-export function updateBlog(blogId, title, content, referenceLinks, category,image,token){
-	return async(dispatch)=>{
+//blogId, title, content, referenceLinks, category,image
+export function updateBlog(data, token) {
+	return async (dispatch) => {
 		const toastId = toast.loading("Loading...");
 
-		try{
-			console.log("UPDATE_BLOG_API",UPDATE_BLOG_API);
+		try {
+			console.log("UPDATE_BLOG_API", UPDATE_BLOG_API);
 
-			const response = await apiConnector("POST",UPDATE_BLOG_API,{blogId, title, content, referenceLinks, category,image,token});
+			const response = await apiConnector("POST", UPDATE_BLOG_API, data ,{
+				"Content-Type": "multipart/form-data",
+				Authorisation: `Bearer ${token}`,
+			});
 
 			if (!response.data.success) {
 				throw new Error(response.data.message)
@@ -47,7 +54,7 @@ export function updateBlog(blogId, title, content, referenceLinks, category,imag
 
 			dispatch(getBlog(blogId));
 		}
-		catch(error){
+		catch (error) {
 			toast.error(error.response.data.message);
 			//toast.error('Something went wrong, please try again')
 			console.log(error);
@@ -57,12 +64,12 @@ export function updateBlog(blogId, title, content, referenceLinks, category,imag
 	}
 }
 
-export function deleteBlog(id){
-	return async(dispatch)=>{
+export function deleteBlog(id) {
+	return async (dispatch) => {
 		const toastId = toast.loading("Loading...");
-		try{
-			console.log("DELETE_BLOG_API",DELETE_BLOG_API);
-			const response = await apiConnector("PUT",DELETE_BLOG_API,{blogId:id});
+		try {
+			console.log("DELETE_BLOG_API", DELETE_BLOG_API);
+			const response = await apiConnector("PUT", DELETE_BLOG_API, { blogId: id });
 
 			if (!response.data.success) {
 				throw new Error(response.data.message)
@@ -70,7 +77,7 @@ export function deleteBlog(id){
 			toast.success(response.data.message);
 			dispatch(getAllBlogs());
 		}
-		catch(error){
+		catch (error) {
 			toast.error(error.response.data.message);
 			//toast.error('Something went wrong, please try again')
 			console.log(error);
@@ -79,14 +86,14 @@ export function deleteBlog(id){
 	}
 }
 
-export function getAllBlogs(){
-	return async(dispatch)=>{
+export function getAllBlogs() {
+	return async (dispatch) => {
 		const toastId = toast.loading("Loading...");
 
-		try{
-			
-			const response = await apiConnector("GET",GET_ALL_BLOG_API);
-			
+		try {
+
+			const response = await apiConnector("GET", GET_ALL_BLOG_API);
+
 			// console.log("GET_ALL_BLOG_API",GET_ALL_BLOG_API);
 			// console.log("GET_ALL_BLOG_API RESPONSE............", response);
 
@@ -101,7 +108,7 @@ export function getAllBlogs(){
 
 
 		}
-		catch(error){
+		catch (error) {
 			toast.error(error.response.data.message);
 			//toast.error('Something went wrong, please try again')
 			console.log(error);
@@ -111,15 +118,15 @@ export function getAllBlogs(){
 	}
 }
 
-export function getBlog(id){
-	return async(dispatch)=>{
+export function getBlog(id) {
+	return async (dispatch) => {
 		const toastId = toast.loading("Loading...");
 
-		try{
+		try {
 
 			// console.log("GET_BLOG_API",GET_BLOG_API+id);
 
-			const response = await apiConnector("GET",GET_BLOG_API+id);
+			const response = await apiConnector("GET", GET_BLOG_API + id);
 
 			// console.log("getBlog" , response.data.BlogDetails.title);
 
@@ -128,11 +135,11 @@ export function getBlog(id){
 			}
 
 			dispatch(addBlog(response.data.BlogDetails));
-			
+
 
 
 		}
-		catch(error){
+		catch (error) {
 			toast.error(error.response.data.message);
 			//toast.error('Something went wrong, please try again')
 			console.log(error);

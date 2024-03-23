@@ -26,10 +26,10 @@ function AllBlogs() {
 									</div>
 									<div className="flex flex-1 flex-col justify-between p-3">
 										<div className="flex-1">
-											
-											<a onClick={()=> navigate(`/blog/${blog._id}`)} className="mt-1 block hover:cursor-pointer hover:underline">
-												<p className="text-xl font-semibold ">{blog.title.substring(0,70)}<span>{blog.title.length>70?"...":""}</span></p>
-												
+
+											<a onClick={() => navigate(`/blog/${blog._id}`)} className="mt-1 block hover:cursor-pointer hover:underline">
+												<p className="text-xl font-semibold ">{blog.title.substring(0, 70)}<span>{blog.title.length > 70 ? "..." : ""}</span></p>
+
 											</a>
 											{/* <p className='mt-1 block font-base text-md '>{blog.content[0].header}</p> */}
 											{/* <p className="mt-3 text-base text-gray-500"> descreption length less that 730   <p> */}
@@ -40,7 +40,7 @@ function AllBlogs() {
 										<div className="mt-5 flex justify-between">
 											<div className=' flex items-center'>
 												<div className="flex-shrink-0">
-														<img className="h-12 w-12 rounded-full" src={blog.user.image?blog.user.image : `https://api.dicebear.com/5.x/initials/svg?seed=${blog.user.firstName} ${blog.user.lastName}`} alt="user"></img>
+													<img className="h-12 w-12 rounded-full" src={blog.user.image ? blog.user.image : `https://api.dicebear.com/5.x/initials/svg?seed=${blog.user.firstName} ${blog.user.lastName}`} alt="user"></img>
 												</div>
 												<div className="ml-3">
 													<p className="text-sm font-medium text-gray-900">
@@ -52,7 +52,7 @@ function AllBlogs() {
 												</div>
 											</div>
 											<div className='flex flex-row'>
-												<MdOutlineInsertComment className='text-2xl m-2'/>
+												<MdOutlineInsertComment className='text-2xl m-2' />
 												<span className='mt-1 text-1xl'> {blog.comments.length}</span>
 											</div>
 										</div>
@@ -73,3 +73,23 @@ function AllBlogs() {
 }
 
 export default AllBlogs;
+
+{/* <div>
+	<a href="#"
+		class="inline-block pb-1 mt-2 text-base font-black text-blue-600 uppercase border-b border-transparent hover:border-blue-600">Read
+                            More -></a>
+</div> 
+
+text
+<div class="flex flex-col justify-center items-center h-screen">
+    <div class="bg-cover bg-no-repeat w-full"
+        style="background-image: url('https://images.unsplash.com/photo-1530053969600-caed2596d242');">
+        <h1 class="py-10 font-black text-8xl md:text-9xl bg-gray-100 mix-blend-lighten uppercase text-center">
+            Holidays <br>
+            At <br>
+            Bali
+        </h1>
+    </div>
+</div>
+
+*/}

@@ -6,9 +6,10 @@ import { toast } from 'react-toastify';
 import { createComment, updateComment, deleteComment} from '../../Services/operations/apiComment';
 
 function Comment({ SingleBlog }) {
-	const { user } = useSelector((s) => s.profile);
+	var { user } = useSelector((s) => s.profile);
 	const { token } = useSelector((s) => s.auth);
 	const dispatch = useDispatch();
+	user = JSON.parse(user);
 
 	const [editComment,setEditComment] = useState(null);
 	
