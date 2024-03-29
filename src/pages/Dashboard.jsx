@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProfile, updateProfile } from '../Services/operations/apiProfile';
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
-import { MdClose, MdEdit, MdOutlineInsertComment } from "react-icons/md";
+import { MdClose, MdEdit,MdDelete, MdOutlineInsertComment } from "react-icons/md";
 
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { formatDate } from '../Services/formatDate';
+import { deleteBlog } from '../Services/operations/apiBlog';
+import { setUpdateBlog } from '../redux/slices/blogsSlice';
 
 const Dashboard = () => {
 
@@ -20,7 +22,7 @@ const Dashboard = () => {
 	const { profileDetails } = useSelector((state) => state.profile);
 	const { UserBlogs } = useSelector((state) => state.profile);
 
-	let { register, handleSubmit, reset,formState: { errors, isSubmitSuccessful } } = useForm();
+	let { register, handleSubmit, reset, formState: { errors, isSubmitSuccessful } } = useForm();
 
 	const toggleModal = () => {
 		setOpenModal(!openModal);
@@ -41,7 +43,16 @@ const Dashboard = () => {
 		}
 	}
 
+	const HandleDeleteBlog = (ID) =>{
+		const choice = confirm("Blog will be Deleted, are you sure ???");
+		if(choice){
+			dispatch(deleteBlog(ID,token));
+			toast.success('Blog Deleted Successfully !!!');
+		}
+	}
+
 	useEffect(() => {
+		dispatch(setUpdateBlog(false));
 		if (!profileDetails || !UserBlogs) {
 			dispatch(getProfile(token));
 		}
@@ -157,9 +168,14 @@ const Dashboard = () => {
 													<MdOutlineInsertComment className='text-2xl m-2' />
 													<span className='mt-1 text-1xl'> {blog.comments.length}</span>
 												</div>
-												<div className='flex bg-richblack-800 mr-5 p-2 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => navigate(`/updateBlog/${blog._id}`)}>
-													<label>Edit</label>
-													<CiEdit className='text-2xl'></CiEdit>
+												<div className='flex'>
+													<div className='flex bg-richblack-800 mr-2 p-2 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => navigate(`/updateBlog/${blog._id}`)}>
+														<label>Edit</label>
+														<CiEdit className='text-2xl'></CiEdit>
+													</div>
+													<div className='flex bg-richblack-800 mr-5 p-2 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => HandleDeleteBlog(blog._id)}>
+														<MdDelete className='text-2xl'></MdDelete>
+													</div>
 												</div>
 
 											</div>

@@ -4,16 +4,13 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-const ChipInput = ({ name, label, register, setValue }) => {
-    const [tags, settags] = useState([])
+const ChipInput = ({ name, label, register, setValue, defaultContent }) => {
+    const { UpdateBlog } = useSelector((s) => s.blog);
+    const [tags, settags] = useState(UpdateBlog ? defaultContent : []);
 
     useEffect(() => {
         register(name);
-        //console.log(`${name} : `, tags);
-        // if(editCourse ) {
-        //     settags(JSON.parse(course?.tag));
-        //     setValue(name, JSON.parse(course?.tag));
-        // }
+        setValue(name, tags);
     }, [])
 
     return (

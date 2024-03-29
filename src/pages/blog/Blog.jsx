@@ -23,9 +23,6 @@ const Blog = () => {
 	const ID = location.pathname.split("/").at(-1);
 	const SingleBlog = OneBlog.length > 0 ? OneBlog[0] : null;
 	var flag = true;
-	user = JSON.parse(user);
-
-	//console.log("printing SingleBlog: ", SingleBlog);
 
 	const HandleSaveBlog = (mode) =>{
 		if (user == null) {
@@ -149,7 +146,7 @@ const Blog = () => {
 											<p className='text-md mt-1 font-bold text-richblack-200'>{"References "}</p>
 											{
 												SingleBlog?.referenceLinks?.length > 0 && SingleBlog.referenceLinks?.map((link, index) => (
-													<a key={index} href={link} target='_blank'
+													<a key={index} href={link.includes('https://')?link:'https://'+link} target='_blank'
 														className='text-md font-bold bg-richblack-600 p-1 rounded-md w-fit'>
 														{link}
 													</a>

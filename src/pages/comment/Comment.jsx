@@ -9,7 +9,6 @@ function Comment({ SingleBlog }) {
 	var { user } = useSelector((s) => s.profile);
 	const { token } = useSelector((s) => s.auth);
 	const dispatch = useDispatch();
-	user = JSON.parse(user);
 
 	const [editComment,setEditComment] = useState(null);
 	

@@ -14,14 +14,13 @@ const User = require('../models/User')
 */
 exports.createBlog = async (req, res) => {
 	try {
-		const { title, content, referenceLinks, category} = req.body;
-
+		const { title, referenceLinks, category} = req.body;
+		const  content  = JSON.parse(req.body.content);
 		const { email, id } = req.user;
 		const userDetails = await User.findOne({ email });
 
 		var url = "";
-
-		if (!title || !content || !category || content[0].heading === '' || content[0].body === '') {
+		if (!title || content[0].heading === '' || content[0].body === '') {
 			return res.status(403).send({
 				success: false,
 				message: "All Fields are required",
@@ -40,7 +39,7 @@ exports.createBlog = async (req, res) => {
 			url = RandomBlogImage[Math.floor(Math.random() * 4)];
 		}
 
-
+		
 		const NewBlog = await Blog.create({
 			title:title,content: content,
 			image: url,referenceLinks: referenceLinks,
@@ -51,7 +50,7 @@ exports.createBlog = async (req, res) => {
 
 		return res.status(200).json({
 			success: true,
-			data:NewBlog,
+			NewBlog:NewBlog,
 			message: "Blog Created Successfull.",
 		});
 
@@ -107,12 +106,13 @@ exports.getAllBlogs = async (req, res) => {
 */
 exports.updateBlog = async (req, res) => {
 	try {
-		const {blogId, title, content, referenceLinks, category,image } = req.body;
-
+		const {blogId, title, referenceLinks, category,image } = req.body;
+		const  content  = JSON.parse(req.body.content);
 		const { email, id } = req.user;
 		const userDetails = await User.findOne({ email });
+		cosole.log(req.body);
 
-		if (!title || !content || !category || content[0].heading === '' || content[0].body === '') {
+		if (!title || !category || content[0].heading === '' || content[0].body === '') {
 			return res.status(403).send({
 				success: false,
 				message: "All Fields are required",
@@ -134,7 +134,7 @@ exports.updateBlog = async (req, res) => {
 		}
 
 
-		const updatedBlog = await Blog.findByIdAndUpdate({_id:blogId},
+		const NewBlog = await Blog.findByIdAndUpdate({_id:blogId},
 			{
 				title:title,content: content,
 				image: url,referenceLinks: referenceLinks,
@@ -145,7 +145,7 @@ exports.updateBlog = async (req, res) => {
 
 		return res.status(200).json({
 			success: true,
-			data: updatedBlog,
+			NewBlog:NewBlog,
 			message: "Blog Updated successfully",
 		});
 	}

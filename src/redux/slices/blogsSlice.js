@@ -3,6 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
     AllBlogs : [],
     OneBlog : [],
+    UpdateBlog : false,
 }
 
 const blogsSlice= createSlice({
@@ -14,11 +15,14 @@ const blogsSlice= createSlice({
         },
         addBlog : (state, action) =>{
             state.OneBlog = action.payload;
+        },
+        setUpdateBlog : (state, action) =>{
+            state.UpdateBlog = action.payload;
         }
     }
 });
 
-export const {addBlogs, addBlog} = blogsSlice.actions;
+export const {addBlogs, addBlog, setUpdateBlog} = blogsSlice.actions;
 
 export default blogsSlice.reducer;
 
