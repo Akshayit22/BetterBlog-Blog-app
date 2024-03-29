@@ -22,7 +22,7 @@ function App() {
   const isLoggedIn = user == null ? true : false;
 
   return (
-    <div className=' lg:w-[98.9vw]  min-h-screen bg-richblack-900 flex flex-col text-white'>
+    <div className=' lg:w-[98.9vw]  min-h-screen bg-gradient-to-r from-richblack-700 to-blue-900 flex flex-col text-white'>
 
       <div className='pb-[70px]'>
 

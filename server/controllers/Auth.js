@@ -301,6 +301,34 @@ exports.CloudMail = async (req, res) => {
 	}
 }
 
+exports.contactUs = async(req,res) =>{
+	try{
+		const {email,message,name} = req.body;
+
+		const resp = await ContactUs.create({
+			email,message,name
+		});
+
+		console.log("contact us form sumbitted successfully.");
+
+		return res.status(200).json({
+			success: true,
+			response : resp,
+			message: "contact us form sumbitted successfully.",
+		});		
+
+	}
+	catch(error){
+		console.error(error);
+		return res.status(500).json({
+			success: false,
+			url:url,
+			message: "Error submitting contact us form. Please try again.",
+		});
+	}
+}
+
+/* Upload API
 exports.uploadImage = async(req,res) =>{
 	try{
 		console.log(req);
@@ -342,30 +370,4 @@ exports.uploadImage = async(req,res) =>{
 		});
 	}
 }
-
-exports.contactUs = async(req,res) =>{
-	try{
-		const {email,message,name} = req.body;
-
-		const resp = await ContactUs.create({
-			email,message,name
-		});
-
-		console.log("contact us form sumbitted successfully.");
-
-		return res.status(200).json({
-			success: true,
-			response : resp,
-			message: "contact us form sumbitted successfully.",
-		});		
-
-	}
-	catch(error){
-		console.error(error);
-		return res.status(500).json({
-			success: false,
-			url:url,
-			message: "Error submitting contact us form. Please try again.",
-		});
-	}
-}
+*/

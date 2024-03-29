@@ -3,9 +3,10 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-const Upload = ({ name, label, register, setValue }) => {
-  const [image, setimage] = useState(null)
-  // const { editCourse, course } = useSelector((state) => state.course);
+const Upload = ({ name, label, register, setValue, defaultContent }) => {
+
+  const { UpdateBlog } = useSelector((s) => s.blog);
+  const [image, setimage] = useState(UpdateBlog?defaultContent:null);
 
   const handelonchange = (e) => {
     const file = e.target.files[0];
@@ -23,9 +24,6 @@ const Upload = ({ name, label, register, setValue }) => {
   }
 
   useEffect(() => {
-    // if (editCourse) {
-    //   setimage(course?.thumbnail);
-    // }
   }, [])
 
 
@@ -77,14 +75,11 @@ const Upload = ({ name, label, register, setValue }) => {
                     Drag and drop an image, or click to{" "}
                     <span className="font-semibold text-blue-100">Browse</span> a file
                   </p>
-                  {/* <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-richblack-200">
-                    <li>Aspect ratio 16:9</li>
-                    <li>Recommended size 1024x576</li>
-                  </ul> */}
+
                 </div>
               </div>
             </label>
-            
+
           </div>
         )
 

@@ -14,11 +14,13 @@ const User = require('../models/User')
 */
 exports.createBlog = async (req, res) => {
 	try {
-		const { title, referenceLinks, category} = req.body;
+		const { title } = req.body;
 		const  content  = JSON.parse(req.body.content);
+		const category = JSON.parse(req.body.category);
+		const referenceLinks = JSON.parse(req.body.referenceLinks);
 		const { email, id } = req.user;
 		const userDetails = await User.findOne({ email });
-
+		
 		var url = "";
 		if (!title || content[0].heading === '' || content[0].body === '') {
 			return res.status(403).send({
@@ -36,7 +38,7 @@ exports.createBlog = async (req, res) => {
 			)
 			url = ImageUpload.secure_url;
 		} else {
-			url = RandomBlogImage[Math.floor(Math.random() * 4)];
+			url = RandomBlogImage[Math.floor(Math.random()*5)];
 		}
 
 		
@@ -106,11 +108,13 @@ exports.getAllBlogs = async (req, res) => {
 */
 exports.updateBlog = async (req, res) => {
 	try {
-		const {blogId, title, referenceLinks, category,image } = req.body;
-		const  content  = JSON.parse(req.body.content);
+		const {blogId, title,image } = req.body;
+		const content  = JSON.parse(req.body.content);
+		const category = JSON.parse(req.body.category);
+		const referenceLinks = JSON.parse(req.body.referenceLinks);
 		const { email, id } = req.user;
 		const userDetails = await User.findOne({ email });
-		cosole.log(req.body);
+		console.log(req.body);
 
 		if (!title || !category || content[0].heading === '' || content[0].body === '') {
 			return res.status(403).send({
@@ -141,7 +145,7 @@ exports.updateBlog = async (req, res) => {
 				category: category, user: userDetails,
 			},
 			{new:true});
-		console.log("Blog Updated :", updatedBlog);
+		console.log("Blog Updated :", NewBlog);
 
 		return res.status(200).json({
 			success: true,

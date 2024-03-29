@@ -15,28 +15,28 @@ function Footer() {
 			<footer className=" rounded-lg shadow dark:bg-gray-900 m-4">
 				<div className=" max-w-screen-xl mx-auto p-4 md:py-8">
 					<div className="sm:flex sm:items-center sm:justify-between">
-						<div className='font-bold text-2xl cursor-pointer flex items-center gap-1' onClick={() => Navigate('/home')}>
+						<div className='font-bold text-2xl cursor-pointer flex items-center gap-1' onClick={() => navigate('/home')}>
 
 							<span>Better Blog{":)"}</span>
 						</div>
 						<ul className="flex flex-wrap items-center mb-6 mt-6 lg:mt-0 text-sm font-medium text-gray-500 dark:text-gray-400">
 							<li className='flex text-[1rem] gap-1' >
 								<TfiEmail className='mt-1'/> 
-								<a href="#" className="hover:underline me-4 md:me-6">Email</a>
+								<a href="mailto:akshayit22@gmail.com" target='_blank' className="hover:underline me-4 md:me-6">Email</a>
 							</li>
 							<li className='flex text-[1rem] gap-1'>
 								<FaGithub className='mt-1'/>
-								<a href="#" className="hover:underline me-4 md:me-6">GitHub</a>
+								<a href="https://github.com/akshayit22" target='_blank' className="hover:underline me-4 md:me-6">GitHub</a>
 							</li>
 							<li className='flex text-[1rem] gap-1'>
 								<FaLinkedinIn className='mt-1'/>
-								<a href="#" className="hover:underline me-4 md:me-6">LinkedIn</a>
+								<a href="https://www.linkedin.com/in/akshay-l-telang-340162176" target='_blank' className="hover:underline me-4 md:me-6">LinkedIn</a>
 							</li>
-							<li className='text-[1rem]' onClick={()=> navigate()}>
-								<a href="#" className="hover:underline me-4 md:me-6">About</a>
+							<li className='text-[1rem]' onClick={()=> navigate('/about')}>
+								<p className="hover:underline hover:cursor-pointer me-4 md:me-6">About</p>
 							</li>
-							<li className='text-[1rem]' onClick={()=> navigate()}>
-								<a  className="hover:underline">Contact</a>
+							<li className='text-[1rem]' onClick={()=> navigate('/contactUs')}>
+								<p  className="hover:underline hover:cursor-pointer">Contact</p>
 							</li>
 						</ul>
 					</div>

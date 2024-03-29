@@ -24,7 +24,7 @@ export function createBlog(data, token, navigate) {
 			}
 			console.log("CREATE_BLOG_API Response", response);
 			toast.success(response.data.message);
-			navigate(`/blog/${response.data.NewBlog._id}`)
+			navigate(`/blog/${response.data.NewBlog._id}`);
 		}
 		catch (error) {
 			console.log(error);

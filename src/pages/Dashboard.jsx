@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProfile, updateProfile } from '../Services/operations/apiProfile';
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
-import { MdClose, MdEdit,MdDelete, MdOutlineInsertComment } from "react-icons/md";
+import { MdClose, MdEdit, MdDelete, MdOutlineInsertComment } from "react-icons/md";
 
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -43,10 +43,10 @@ const Dashboard = () => {
 		}
 	}
 
-	const HandleDeleteBlog = (ID) =>{
+	const HandleDeleteBlog = (ID) => {
 		const choice = confirm("Blog will be Deleted, are you sure ???");
-		if(choice){
-			dispatch(deleteBlog(ID,token));
+		if (choice) {
+			dispatch(deleteBlog(ID, token));
 			toast.success('Blog Deleted Successfully !!!');
 		}
 	}
@@ -108,7 +108,7 @@ const Dashboard = () => {
 							<CiEdit className='text-2xl mt-1'></CiEdit>
 						</div>
 
-						<div className=" sm:w-[350px] md:w-[400px] px-6 py-6  text-center bg-gray-800 rounded-lg lg:mt-0 xl:px-10 bg-richblack-600 ">
+						<div className=" sm:w-[350px] md:w-[450px] px-6 py-6  text-center bg-gray-800 rounded-lg lg:mt-0 xl:px-10 bg-richblack-600 ">
 
 							<div className='relative hover:cursor-pointer hover:text-richblack-400'>
 								<CiEdit className='text-3xl shadow-md absolute top-0 right-0' onClick={() => toggleModal()} />
@@ -151,7 +151,7 @@ const Dashboard = () => {
 										<div className="flex-shrink-0">
 											<img className="h-45 w-full object-cover" src={blog.image} alt="img" loading='lazy'></img>
 										</div>
-										<div className="flex flex-1 flex-col justify-between p-3 bg-richblack-600">
+										<div className="flex flex-1 flex-col justify-between p-3 bg-richblack-800">
 											<div className="flex-1">
 
 												<a onClick={() => navigate(`/blog/${blog._id}`)} className="mt-1 block hover:cursor-pointer hover:underline">
@@ -210,11 +210,13 @@ const Dashboard = () => {
 											<div className="flex-1">
 
 												<a onClick={() => navigate(`/blog/${blog._id}`)} className="mt-1 block hover:cursor-pointer hover:underline">
-													<p className="text-xl font-semibold ">{blog.title.substring(0, 70)}<span>{blog.title.length > 70 ? "..." : ""}</span></p>
+													<p className="text-xl font-semibold text-richblack-10">{blog.title.substring(0, 70)}<span>{blog.title.length > 70 ? "..." : ""}</span></p>
 
 												</a>
+												<p className='mt-1 block font-base text-lg text-richblack-50'>{blog.content[0].header.substring(0, 45)}<span>{blog.content[0].header.length > 45 ? "..." : ""}</span></p>
+												<p className="mt-2 text-base text-gray-500 text-richblack-200"> {blog.content[0].body.substring(0, 250)}<span>{blog.content[0].body.length > 250 ? "..." : ""}</span>  </p>
 
-												<p className="mt-2 text-base text-gray-500 text-richblack-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta, eum aliquid? Eaque quae sint at minus autem provident et doloremque eius cumque nesciunt tempora saepe quos modi, nostrum, ab quis.</p>
+												{/* <p className="mt-2 text-base text-gray-500 text-richblack-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta, eum aliquid? Eaque quae sint at minus autem provident et doloremque eius cumque nesciunt tempora saepe quos modi, nostrum, ab quis.</p> */}
 
 
 											</div>

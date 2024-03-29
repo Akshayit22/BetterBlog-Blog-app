@@ -12,14 +12,16 @@ function AllBlogs() {
 	console.log(data);
 
 	return (
-		<div className=''>
+		<div className='w-full '>
 
+			
 			<div className='mx-auto mt-12 grid max-w-lg gap-10 lg:max-w-none lg:grid-cols-3 md:grid-cols-2  p-5'>
+
 				{
 					data?.length > 0 ?
 						(
 							data.map((blog, index) => (
-								<div className="flex flex-col overflow-hidden rounded-md shadow-lg shadow-richblack-700 border border-richblack-300" key={index}>
+								<div className="flex flex-col overflow-hidden rounded-md shadow-lg shadow-richblack-700 border border-richblack-300 bg-gradient-to-r  from-blue-900 to-blue-800" key={index}>
 
 									<div className="flex-shrink-0">
 										<img className="h-60 w-full object-cover" src={blog.image} alt="img" loading='lazy'></img>
@@ -28,12 +30,13 @@ function AllBlogs() {
 										<div className="flex-1">
 
 											<a onClick={() => navigate(`/blog/${blog._id}`)} className="mt-1 block hover:cursor-pointer hover:underline">
-												<p className="text-xl font-semibold ">{blog.title.substring(0, 70)}<span>{blog.title.length > 70 ? "..." : ""}</span></p>
+												<p className="text-xl font-semibold text-richblack-10">{blog.title.substring(0, 70)}<span>{blog.title.length > 70 ? ". . ." : ""}</span></p>
 
 											</a>
-											{/* <p className='mt-1 block font-base text-md '>{blog.content[0].header}</p> */}
-											{/* <p className="mt-3 text-base text-gray-500"> descreption length less that 730   <p> */}
-											<p className="mt-2 text-base text-gray-500 text-richblack-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta, eum aliquid? Eaque quae sint at minus autem provident et doloremque eius cumque nesciunt tempora saepe quos modi, nostrum, ab quis.</p>
+
+											<p className='mt-1 block font-base text-lg text-richblack-50'>{blog.content[0].header.substring(0, 40)}<span>{blog.content[0].header.length > 45 ? ". . ." : ""}</span></p>
+											<p className="mt-2 text-base text-gray-500 text-richblack-200"> {blog.content[0].body.substring(0, 250)}<span>{blog.content[0].body.length > 250 ? "..." : ""}</span>  </p>
+											{/* <p className="mt-2 text-base text-gray-500 text-richblack-400"> descreption length less that 730 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta, eum aliquid? Eaque quae sint at minus autem provident et doloremque eius cumque nesciunt tempora saepe quos modi, nostrum, ab quis.</p> */}
 
 
 										</div>
@@ -82,8 +85,7 @@ export default AllBlogs;
 
 text
 <div class="flex flex-col justify-center items-center h-screen">
-    <div class="bg-cover bg-no-repeat w-full"
-        style="background-image: url('https://images.unsplash.com/photo-1530053969600-caed2596d242');">
+    <div class="bg-cover bg-no-repeat w-full" style="background-image: url('https://images.unsplash.com/photo-1530053969600-caed2596d242');">
         <h1 class="py-10 font-black text-8xl md:text-9xl bg-gray-100 mix-blend-lighten uppercase text-center">
             Holidays <br>
             At <br>
