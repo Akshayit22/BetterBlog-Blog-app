@@ -328,7 +328,6 @@ exports.contactUs = async(req,res) =>{
 	}
 }
 
-/* Upload API
 exports.uploadImage = async(req,res) =>{
 	try{
 		console.log(req);
@@ -370,4 +369,3 @@ exports.uploadImage = async(req,res) =>{
 		});
 	}
 }
-*/
