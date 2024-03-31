@@ -28,7 +28,7 @@ exports.createBlog = async (req, res) => {
 				message: "All Fields are required",
 			});
 		}
-
+		console.log("req.files: " , req.files);
 		if (req.files) {
 			//Image Uploader
 			const Image = req.files.Image;
@@ -37,8 +37,9 @@ exports.createBlog = async (req, res) => {
 				process.env.FOLDER_NAME,
 			)
 			url = ImageUpload.secure_url;
+			console.log("File Uploaded : " , url);
 		} else {
-			url = RandomBlogImage[Math.floor(Math.random()*5)];
+			url = RandomBlogImage[Math.floor(Math.random()*4)];
 		}
 
 		
@@ -124,8 +125,8 @@ exports.updateBlog = async (req, res) => {
 		}
 
 		var url = "";
-		
-		if (req.files && !image) {
+		console.log("req.files:", req.files);
+		if (req.files) {
 			//Image Uploader
 			const Image = req.files.Image;
 			const ImageUpload = await uploadImageToCloudinary(

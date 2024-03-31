@@ -3,7 +3,7 @@ import { BlogEndpoints } from "../api";
 import { toast } from "react-hot-toast";
 
 const { CREATE_BLOG_API, UPDATE_BLOG_API, GET_ALL_BLOG_API, GET_BLOG_API, DELETE_BLOG_API } = BlogEndpoints;
-import {getProfile} from '../operations/apiProfile';
+import { getProfile } from '../operations/apiProfile';
 import { addBlogs, addBlog } from '../../redux/slices/blogsSlice';
 
 //title,content,referenceLinks,category
@@ -36,14 +36,14 @@ export function createBlog(data, token, navigate) {
 	}
 }
 //blogId, title, content, referenceLinks, category,image
-export function updateBlog(data, token,navigate) {
+export function updateBlog(data, token, navigate) {
 	return async (dispatch) => {
 		const toastId = toast.loading("Loading...");
 
 		try {
 			console.log("UPDATE_BLOG_API", UPDATE_BLOG_API);
 
-			const response = await apiConnector("PUT", UPDATE_BLOG_API, data ,{
+			const response = await apiConnector("PUT", UPDATE_BLOG_API, data, {
 				"Content-Type": "multipart/form-data",
 				Authorisation: `Bearer ${token}`,
 			});
@@ -52,7 +52,7 @@ export function updateBlog(data, token,navigate) {
 				throw new Error(response.data.message)
 			}
 			toast.success(response.data.message);
-			
+
 			//dispatch(getBlog(blogId));
 			navigate(`/blog/${response.data.NewBlog._id}`)
 		}
@@ -66,12 +66,12 @@ export function updateBlog(data, token,navigate) {
 	}
 }
 
-export function deleteBlog(blogId,token) {
+export function deleteBlog(blogId, token) {
 	return async (dispatch) => {
 		const toastId = toast.loading("Loading...");
 		try {
 			console.log("DELETE_BLOG_API", DELETE_BLOG_API);
-			const response = await apiConnector("PUT", DELETE_BLOG_API, { blogId,token},{
+			const response = await apiConnector("PUT", DELETE_BLOG_API, { blogId, token }, {
 				Authorisation: `Bearer ${token}`,
 			});
 			if (!response.data.success) {

@@ -35,7 +35,6 @@ const userSchema = new mongoose.Schema(
 		savedBlogs:[{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Blog",
-			unique:true,
 		}],
 	},
 	{ timestamps: true }

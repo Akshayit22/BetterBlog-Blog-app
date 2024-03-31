@@ -4,13 +4,13 @@ import { toast } from "react-hot-toast";
 
 const {CONTACT_US_API} = contactusEndpoint;
 
-export function contactUs(name,email,body){
+export function contactUs(name,email,message){
 	return async(dispatch)=>{
 		const toastId = toast.loading("Loading...");
 
 		try{
 			console.log("CONTACT_US_API",CONTACT_US_API);
-			const response = await apiConnector("POST",CONTACT_US_API,{name,email,body});
+			const response = await apiConnector("POST",CONTACT_US_API,{name,email,message});
 
 			console.log("ContactUs API RESPONSE............", response);
 

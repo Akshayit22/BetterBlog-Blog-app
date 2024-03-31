@@ -8,7 +8,7 @@ import { MdKeyboardBackspace, MdSave } from "react-icons/md";
 import Comment from '../comment/Comment';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {saveBlog} from '../../Services/operations/apiProfile';;
+import { saveBlog } from '../../Services/operations/apiProfile';;
 
 const Blog = () => {
 
@@ -16,22 +16,24 @@ const Blog = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	const [flag, setFlag] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const { OneBlog } = useSelector((state) => state.blog);
 	var { user } = useSelector((state) => state.profile);
 	const { token } = useSelector((state) => state.auth);
 	const ID = location.pathname.split("/").at(-1);
 	const SingleBlog = OneBlog.length > 0 ? OneBlog[0] : null;
-	var flag = true;
+	var user = user?JSON.parse(user):null;
 
-	const HandleSaveBlog = (mode) =>{
+	const HandleSaveBlog = (mode) => {
+		setFlag(true);
 		if (user == null) {
 			toast.error("Login first to Save Blog !!!")
-		}else{
-			dispatch(saveBlog(SingleBlog._id,mode,token));
+		} else {
+			dispatch(saveBlog(SingleBlog._id, mode, token));
 			dispatch(getBlog(ID));
-			flag = !flag;w
 		}
+
 	}
 
 	useEffect(() => {
@@ -64,19 +66,21 @@ const Blog = () => {
 
 
 										{
-											user?.savedBlogs?.includes(SingleBlog._id) && flag ?
+											!flag && 
+											(user?.savedBlogs?.includes(SingleBlog._id) ?
 												(
-													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={()=> HandleSaveBlog('Unsave')}>
+													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => HandleSaveBlog('Unsave')}>
 														<label>UnSave</label>
 														<MdSave className='text-2xl' />
 													</div>
 												) :
 												(
-													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={()=> HandleSaveBlog('Save')}>
+													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => HandleSaveBlog('Save')}>
 														<label>Save</label>
 														<MdSave className='text-2xl' />
 													</div>
 												)
+											)
 										}
 
 										{
@@ -89,7 +93,7 @@ const Blog = () => {
 													</div>
 												) :
 												(
-													<p className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => navigate('/user-auth')}>Create Blog</p>
+													<p className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => navigate('/dashboard')}>Create Blog</p>
 												)
 										}
 
@@ -146,7 +150,7 @@ const Blog = () => {
 											<p className='text-md mt-1 font-bold text-richblack-200'>{"References "}</p>
 											{
 												SingleBlog?.referenceLinks?.length > 0 && SingleBlog.referenceLinks?.map((link, index) => (
-													<a key={index} href={link.includes('https://')?link:'https://'+link} target='_blank'
+													<a key={index} href={link.includes('https://') ? link : 'https://' + link} target='_blank'
 														className='text-md font-bold bg-richblack-600 p-1 rounded-md w-fit'>
 														{link}
 													</a>

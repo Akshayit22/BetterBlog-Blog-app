@@ -45,7 +45,7 @@ const NewBlog = () => {
 			formData.append('referenceLinks', JSON.stringify(data.ReferenceLinks));
 			formData.append('token',token);
 
-			if(data.thumbnailImage.length > 0){
+			if(data.thumbnailImage){
 				formData.append('Image', data.thumbnailImage);
 			}
 

@@ -30,12 +30,13 @@ const UpdatedBlog = () => {
 	const navigate = useNavigate();
 
 	const { OneBlog } = useSelector((state) => state.blog);
-	const { user } = useSelector((state) => state.profile);
+	var { user } = useSelector((state) => state.profile);
 	const { token } = useSelector((state) => state.auth);
 
 	const [loading, setLoading] = useState(false);
 	const ID = location.pathname.split("/").at(-1);
 	const SingleBlog = OneBlog.length > 0 ? OneBlog[0] : null;
+	var user = user?JSON.parse(user):null;
 
 	const {
 		register,
@@ -64,10 +65,10 @@ const UpdatedBlog = () => {
 			formData.append('token', token);
 			
 
-			if(data?.thumbnailImage?.length > 0){
-				formData.append('Image', SingleBlog.image);
+			if(data.thumbnailImage){
+				formData.append('Image', data.thumbnailImage);
 			}else{
-				formData.append('Image', SingleBlog.image);
+				formData.append('image', SingleBlog.image);
 			}
 
 			console.log("PRINTING FORMDATA", [...formData]);

@@ -51,7 +51,7 @@ const Upload = ({ name, label, register, setValue, defaultContent }) => {
                   role="presentation"
                   tabIndex={0}
                 >
-                  <input id={label} name={name} type="file" accept="image/*,.jpeg,.jpg,.png" tabIndex="-1" multiple=""  {...register(name)} onChange={handelonchange} className="hidden" />
+                  <input id={label} name={name} type="file" accept="image/*,.jpeg,.jpg,.png" tabIndex="-1" multiple=""  {...register(name)} onChange={handelonchange} onDrop={handelonchange} className="hidden" />
                   <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
                     <svg
                       stroke="currentColor"

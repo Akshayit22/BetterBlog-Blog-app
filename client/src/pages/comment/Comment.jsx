@@ -11,7 +11,7 @@ function Comment({ SingleBlog }) {
 	const dispatch = useDispatch();
 
 	const [editComment,setEditComment] = useState(null);
-	
+	var user = user?JSON.parse(user):null;
 
 	const AddComment = (e) => {
 		e.preventDefault();
