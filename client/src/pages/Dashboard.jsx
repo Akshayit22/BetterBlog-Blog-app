@@ -4,7 +4,6 @@ import { getProfile, updateProfile } from '../Services/operations/apiProfile';
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import { MdClose, MdEdit, MdDelete, MdOutlineInsertComment } from "react-icons/md";
-
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { formatDate } from '../Services/formatDate';
@@ -53,7 +52,7 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		dispatch(setUpdateBlog(false));
-		if (!profileDetails || !UserBlogs) {
+		if (profileDetails == null && UserBlogs == null) {
 			dispatch(getProfile(token));
 		}
 		console.log("profileDetails", profileDetails);

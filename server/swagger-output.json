@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Authentication system with MERN stack",
-    "description": "Authentication system with MERN stack with react-redux, mail, cloudinary, jwt, login, signup,resetpassword",
+    "title": "BetterBlog- Blog Application system with MERN stack",
+    "description": "full-stack application that allows users to create, update, read, search, save and comment on blogs of different categories. \n I build this Application using React, Redux, TailwindCss, Axios in frontend and Nodejs, Mongodb, Nodemailer, Cloudinary, JWT authentication in backend.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000/api/v1/",
+  "host": "betterblog-blog-app.onrender.com/api/v1",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/createBlog": {
@@ -29,16 +29,16 @@
                 "token": {
                   "example": "any"
                 },
-                "title": {
+                "content": {
                   "example": "any"
                 },
-                "content": {
+                "category": {
                   "example": "any"
                 },
                 "referenceLinks": {
                   "example": "any"
                 },
-                "category": {
+                "title": {
                   "example": "any"
                 }
               }
@@ -79,19 +79,19 @@
                 "token": {
                   "example": "any"
                 },
-                "blogId": {
-                  "example": "any"
-                },
-                "title": {
-                  "example": "any"
-                },
                 "content": {
+                  "example": "any"
+                },
+                "category": {
                   "example": "any"
                 },
                 "referenceLinks": {
                   "example": "any"
                 },
-                "category": {
+                "blogId": {
+                  "example": "any"
+                },
+                "title": {
                   "example": "any"
                 },
                 "image": {
@@ -150,6 +150,44 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/deleteBlog": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "example": "any"
+                },
+                "blogId": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -337,13 +375,60 @@
       }
     },
     "/getUserDetails": {
-      "get": {
+      "post": {
         "description": "",
         "parameters": [
           {
             "name": "Authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/getUpdatedUser": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -593,7 +678,7 @@
       }
     },
     "/uploadImage": {
-      "put": {
+      "post": {
         "description": "",
         "parameters": [
           {
@@ -664,13 +749,25 @@
       }
     },
     "/dashboard": {
-      "get": {
+      "post": {
         "description": "",
         "parameters": [
           {
             "name": "Authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {

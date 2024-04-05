@@ -1,10 +1,10 @@
 import apiConnector  from '../apiConnector';
 import { AuthEndpoints, contactusEndpoint} from '../api';
 import { toast } from "react-hot-toast";
-const { LOGIN_API, SIGNUP_API,RESETPASSWORD_API,OTPGENRATE_API,UPLOAD_IMAGE_API,DASHBOARD} = AuthEndpoints;
 import {setToken} from '../../redux/slices/authSlice.js';
 import {setUser} from '../../redux/slices/profileSlice.js';
-
+import {setProfileDetails,setUserBlogs} from '../../redux/slices/profileSlice';
+const { LOGIN_API, SIGNUP_API,RESETPASSWORD_API,OTPGENRATE_API,UPLOAD_IMAGE_API,DASHBOARD} = AuthEndpoints;
 
 function login(email, password, navigate) {
 	return async (dispatch) => {
@@ -29,7 +29,6 @@ function login(email, password, navigate) {
 
 			localStorage.setItem("user", JSON.stringify(response.data.user))
 			localStorage.setItem("token", JSON.stringify(response.data.token))
-
 				
 			toast.success('Login Success.');
 			setTimeout(()=>{
@@ -40,7 +39,7 @@ function login(email, password, navigate) {
 		}
 		catch (error) {
 			console.log("LOGIN API ERROR............", error);
-			toast.error(error.response.data.message);
+			toast.error(error?.response?.data?.message);
 			// toast.error(error.response.data.message)
 		}
 		toast.dismiss(toastId);
@@ -111,6 +110,8 @@ export function logout() {
 		localStorage.removeItem("token")
 		localStorage.removeItem("user")
 		toast.success("Logged Out Successfully !!!")
+		dispatch(setProfileDetails(null));
+		dispatch(setUserBlogs(null));
 		//navigate("/")
 	}
 }

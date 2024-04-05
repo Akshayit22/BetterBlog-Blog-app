@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { CiMenuBurger } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { logout } from '../../Services/operations/apiAuth';
-const Navbar = ({getstarted=true}) => {
+const Navbar = () => {
 
-	let [open, setOpen] = useState(false);
 	const Navigate = useNavigate();
 	const dispatch = useDispatch();
 	const location = useLocation();
-	getstarted = getstarted?true:false;
+	let [open, setOpen] = useState(false);
+
+	var { user } = useSelector((state) => state.profile);
+	var user = user?JSON.parse(user):null;
+	const [getstarted, setGetStarted] = useState(true);
+	
 
 	const logoutFunc = () =>{
 		dispatch(logout());
@@ -26,6 +30,11 @@ const Navbar = ({getstarted=true}) => {
 	
 	useEffect(()=>{
 		setOpen(false);
+		if(user != null){
+			setGetStarted(false);
+		}else{
+			setGetStarted(true);
+		}
 	},[location]);
 
 	return (
@@ -51,9 +60,9 @@ const Navbar = ({getstarted=true}) => {
 							</li>))
 					}
 					{
-						getstarted===true?
-						<button onClick={()=> Navigate('/user-auth')} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static' >Get Started</button>
-						:<button onClick={()=>logoutFunc()} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded  duration-500 hover:bg-blue-800 md:static' >Log Out</button>
+						getstarted==true?
+						(<button onClick={()=> Navigate('/user-auth')} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static' >Get Started</button>)
+						:(<button onClick={()=>logoutFunc()} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded  duration-500 hover:bg-blue-800 md:static' >Log Out</button>)
 					}
 					
 				</ul>

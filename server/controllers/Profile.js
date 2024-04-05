@@ -129,3 +129,25 @@ exports.saveBlog = async(req,res) =>{
 		});
 	}
 }
+
+exports.getUpdatedUser = async(req,res)=>{
+	try{
+		const {email,id} = req.user;
+
+		const user = await User.findOne({ email }).populate('additionalDetails');
+		
+		return res.status(200).json({
+			success:true,
+			message:"Updated User details fetched successfully.",
+			user,
+		});
+
+	}
+	catch(error){
+		console.error(error);
+		return res.status(500).json({
+			success: false,
+			message: "Internal server error, while getting updated user details.",
+		});
+	}
+}

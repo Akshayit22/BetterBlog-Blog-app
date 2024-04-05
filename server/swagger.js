@@ -2,10 +2,11 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
 	info:{
-		title:'Authentication system with MERN stack',
-		description:'Authentication system with MERN stack with react-redux, mail, cloudinary, jwt, login, signup,resetpassword'
+		title:'BetterBlog- Blog Application system with MERN stack',
+		description:'full-stack application that allows users to create, update, read, search, save and comment on blogs of different categories. \n I build this Application using React, Redux, TailwindCss, Axios in frontend and Nodejs, Mongodb, Nodemailer, Cloudinary, JWT authentication in backend.'
 	},
-	host:'localhost:3000/api/v1/'
+	host:"https://betterblog-blog-app.onrender.com/api/v1"
+	// host:'localhost:3000/api/v1/'
 };
 
 const outputFile = './swagger-output.json';

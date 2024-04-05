@@ -37,7 +37,7 @@ export const ProfileEndpoints = {
 	UPDATE_PROFILE_API:BASE_API+'profile/updateProfile',
 	GET_PROFILE_DETAILS_API:BASE_API+'profile/getUserDetails',
 	SAVE_BLOG_IN_PROFILE_API:BASE_API+'profile/saveBlog',
-	
+	GET_UPDATED_USER_DETAILS_API:BASE_API+'profile/getUpdatedUser'
 };
 
 

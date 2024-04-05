@@ -2,7 +2,7 @@ import apiConnector from "../apiConnector";
 import { ProfileEndpoints } from "../api";
 import { toast } from "react-hot-toast";
 
-const { UPDATE_PROFILE_API, GET_PROFILE_DETAILS_API, SAVE_BLOG_IN_PROFILE_API } = ProfileEndpoints;
+const { UPDATE_PROFILE_API, GET_PROFILE_DETAILS_API, SAVE_BLOG_IN_PROFILE_API,GET_UPDATED_USER_DETAILS_API} = ProfileEndpoints;
 
 import {setProfileDetails,setUser,setUserBlogs} from '../../redux/slices/profileSlice';
 
@@ -56,7 +56,7 @@ export function getProfile(token) {
 				throw new Error(response.data.message)
 			}
 
-			toast.success(response.data.message);
+			// toast.success(response.data.message);
 
 			dispatch(setProfileDetails(response.data.UserDetails));
 			dispatch(setUserBlogs(response.data.UserBlogs));
@@ -87,11 +87,35 @@ export function saveBlog(blogId,mode,token) {
 
 		}
 		catch (error) {
-			toast.error(error.response.data.message);
-			//toast.error('Something went wrong, please try again')
 			console.log(error);
+			toast.error(error?.response?.data?.message);
+			//toast.error('Something went wrong, please try again')
 		}
 
 		toast.dismiss(toastId);
+	}
+}
+
+export function getUpdatedUser(token){
+	return async (dispatch) => {
+		try{
+			console.log("GET_UPDATED_USER_DETAILS_API", GET_UPDATED_USER_DETAILS_API);
+
+			const response = await apiConnector("POST", GET_UPDATED_USER_DETAILS_API, {token}, {
+				Authorisation: `Bearer ${token}`,
+			});
+			
+			if (!response.data.success) {
+				throw new Error(response.data.message)
+			}
+
+			dispatch(setUser(JSON.stringify({ ...response.data.user,})));
+			localStorage.setItem("user", JSON.stringify(response.data.user));
+
+		}
+		catch(error){
+			console.log(error);
+			toast.error(error?.response?.data?.message);
+		}
 	}
 }

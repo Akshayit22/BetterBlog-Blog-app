@@ -8,7 +8,7 @@ import { MdKeyboardBackspace, MdSave } from "react-icons/md";
 import Comment from '../comment/Comment';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { saveBlog } from '../../Services/operations/apiProfile';;
+import { saveBlog, getUpdatedUser, getProfile } from '../../Services/operations/apiProfile';;
 
 const Blog = () => {
 
@@ -16,22 +16,22 @@ const Blog = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	const [flag, setFlag] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const { OneBlog } = useSelector((state) => state.blog);
 	var { user } = useSelector((state) => state.profile);
 	const { token } = useSelector((state) => state.auth);
 	const ID = location.pathname.split("/").at(-1);
 	const SingleBlog = OneBlog.length > 0 ? OneBlog[0] : null;
-	var user = user?JSON.parse(user):null;
+	var user = user ? JSON.parse(user) : null;
 
 	const HandleSaveBlog = (mode) => {
-		setFlag(true);
 		if (user == null) {
 			toast.error("Login first to Save Blog !!!")
 		} else {
 			dispatch(saveBlog(SingleBlog._id, mode, token));
 			dispatch(getBlog(ID));
+			dispatch(getUpdatedUser(token));
+			dispatch(getProfile(token));
 		}
 
 	}
@@ -66,8 +66,8 @@ const Blog = () => {
 
 
 										{
-											!flag && 
-											(user?.savedBlogs?.includes(SingleBlog._id) ?
+
+											user?.savedBlogs?.includes(SingleBlog._id) ?
 												(
 													<div className='flex bg-richblack-800 mr-5 p-3 rounded-md hover:bg-richblack-700 cursor-pointer' onClick={() => HandleSaveBlog('Unsave')}>
 														<label>UnSave</label>
@@ -80,7 +80,7 @@ const Blog = () => {
 														<MdSave className='text-2xl' />
 													</div>
 												)
-											)
+
 										}
 
 										{
