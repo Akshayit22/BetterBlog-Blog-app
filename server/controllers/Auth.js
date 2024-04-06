@@ -43,7 +43,7 @@ exports.signup = async (req, res) => {
 
 		const user = await User.create({
 			firstName, lastName, email, password: HashedPassword,image,
-			additionalDetails: profileDetails,savedBlogs:[{}]
+			additionalDetails: profileDetails,savedBlogs:{},
 		});
 
 
