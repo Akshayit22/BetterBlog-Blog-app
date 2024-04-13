@@ -7,6 +7,7 @@ const User = require('../models/User');
 const Profile = require('../models/Profile');
 const OTP = require('../models/OTP');
 const ContactUs = require('../models/ContactUs');
+const Blog = require('../models/Blog');
 
 const { uploadImageToCloudinary } = require('../config/imageUploader');
 const mailSender = require("../config/mailSender");
@@ -41,11 +42,24 @@ exports.signup = async (req, res) => {
 
 		const image = `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`;
 
+		var sampleBlog = await Blog.find({});
+		sampleBlog = sampleBlog[0];
+
+		console.log(sampleBlog);
+
 		const user = await User.create({
-			firstName, lastName, email, password: HashedPassword,image,
-			additionalDetails: profileDetails,savedBlogs:{},
+			firstName, lastName, email, image,
+			password: HashedPassword,
+			additionalDetails: profileDetails,
+			savedBlogs:sampleBlog,
 		});
 
+		// here we are adding one sample blog in the saved array of user schema because it gives error in atlas mongodb and removing it.
+		const saved = await User.findByIdAndUpdate(
+			{_id:user._id},
+			{$pull:{savedBlogs:sampleBlog._id}},
+			{new:true}
+		);
 
 		return res.status(200).json({
 			success: true,

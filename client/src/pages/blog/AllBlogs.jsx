@@ -66,7 +66,7 @@ function AllBlogs() {
 						) :
 						(
 							<div className="flex justify-center items-center">
-								<h1 className='space-y-2 text-2xl font-medium leading-6  p-5 mt-'>No Data Found</h1>
+								<h1 className='space-y-2 text-2xl font-medium leading-6  p-5 mt-'>Wait for 30 sec, We are Building server for you.</h1>
 							</div>
 						)
 				}

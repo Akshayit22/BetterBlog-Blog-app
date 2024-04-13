@@ -79,8 +79,11 @@ const GetStarted = () => {
 												}
 											</input>
 										</div>
+										<div>
+											<h1 className='text-sm'>test@user.com | test1/2/3@user.com</h1>
+										</div>
 										{/* Password */}
-										<div className='mt-10 flex mb-10 flex-col  justify-around'>
+										<div className='mt-5 flex mb-10 flex-col  justify-around'>
 											<label htmlFor='password'>password : </label>
 											<input type='password' id='password' name='password'
 												className='bg-richblack-50 text-black p-1 rounded-md'
@@ -89,6 +92,7 @@ const GetStarted = () => {
 													errors.password && <p>Password is required</p>
 												}
 											</input>
+											<h1 className='text-sm' >Sample:-  12345</h1>
 										</div>
 
 										<button type='submit' className='bg-richblack-600 rounded-md h-10 hover:bg-richblack-700 transition:0.5s'>Login</button>
@@ -163,6 +167,7 @@ const GetStarted = () => {
 							)
 					}
 				</div>
+
 			</div>
 		</div>
 	)

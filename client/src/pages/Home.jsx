@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getAllBlogs } from '../Services/operations/apiBlog';
 import Spinner from '../Component/Commen/Spinner';
 import AllBlogs from './blog/AllBlogs';
+import { toast } from 'react-toastify';
 
 const Home = () => {
 
@@ -10,6 +11,7 @@ const Home = () => {
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
+		toast.success("Wait 30 sec, We are Building Server for you.");
 		setLoading(true);
 		dispatch(getAllBlogs());
 		setLoading(false);

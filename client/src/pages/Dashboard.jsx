@@ -117,8 +117,8 @@ const Dashboard = () => {
 								<div className="space-y-2">
 									<div className="flex justify-center items-center flex-col space-y-2 text-lg font-medium leading-6">
 										<h3 className="text-white">{profileDetails.firstName}{" "}{profileDetails.lastName}</h3>
-										<p className="text-indigo-300">{profileDetails.additionalDetails.about}</p>
-										<p className="text-indigo-300">{profileDetails.additionalDetails.gender}</p>
+										<p className="text-indigo-300">{profileDetails.additionalDetails?.about}</p>
+										<p className="text-indigo-300">{profileDetails.additionalDetails?.gender}</p>
 										<p className="text-indigo-300">{profileDetails.email}</p>
 
 										<div className="flex justify-center mt-5 space-x-5">
